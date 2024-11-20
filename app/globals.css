@@ -1,8 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+
+  --heading: "Poppins", sans-serif;
+  --body: "DM Sans", sans-serif;
+
   --background: #ffffff;
   --foreground: #171717;
 }
@@ -11,13 +22,116 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+
+    --primary-snow: #f8bbbe;
+    --primary-light: #f1777c;
+    --primary-normal: #e81c25;
+    --primary-dark: #ce030c;
+    --primary-darker: #820000;
+
+    --secondary-snow: #b0dab5;
+    --secondary-light: #74bf7e;
+    --secondary-normal: #39a346;
+    --secondary-dark: #20892d;
+    --secondary-darker: #005700;
+
+    --neutral-50: #d5d5d5;
+    --neutral-l00: #aaaaaa;
+    --neutral-200: #959595;
+    --neutral-300: #626262;
+    --neutral-400: #2f2f2f;
+
+    --app-white: #f8f8f8;
+    --app-dark: #0f0f0f;
   }
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+  user-select: none;
+  width: 100%;
+  transition: colors 0.75s cubic-bezier(0.215, 0.61, 0.355, 1);
+  -webkit-transition: colors 0.75s cubic-bezier(0.215, 0.61, 0.355, 1);
+  -moz-transition: colors 0.75s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+/* Removes scrollbar on Chrome */
+::-webkit-scrollbar {
+  width: 0;
+}
+
+/* Removes scrollbar on IE */
+::-ms-scrollbar {
+  display: none;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  /* Removes scrollbar on Firefox */
+  scrollbar-width: none;
+}
+
+img {
+  image-rendering: crisp-edges -moz-crisp-edges;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--heading);
+}
+
+a,
+p,
+span,
+button,
+div {
+  font-family: var(--body);
+}
+
+/* Override WebKit autofill styles */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: hsl(var(--foreground));
+  -webkit-box-shadow: 0 0 0px 1000px hsl(var(--background)) inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Override Mozilla Firefox autofill styles */
+input:autofill {
+  background-color: hsl(var(--background)) !important;
+  color: hsl(var(--foreground)) !important;
+}
+
+/* Removes arrows from input type number */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+/* Removes close icon from input type search */
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 @layer utilities {
