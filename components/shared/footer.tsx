@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { Button } from "../ui/button"
 import { Input } from "../ui/input"
 
@@ -5,7 +6,9 @@ export default function Footer() {
 	return (
 		<footer className="w-full bg-neutral-400 pb-10 pt-20 text-white">
 			<div className="mx-auto w-full max-w-screen-xl">
-				<img src="/assets/images/roving-naija-logo.svg" alt="Roving naija logo" />
+				<Link href="/">
+					<img src="/assets/images/roving-naija-logo.svg" alt="Roving naija logo" />
+				</Link>
 				<div className="mt-10 flex justify-between">
 					<div className="flex w-[30%] flex-col gap-5">
 						<div className="mb-4 inline-flex items-center gap-3">

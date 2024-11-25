@@ -43,11 +43,12 @@ export default function Appbar() {
 							<img src="/assets/icons/youtube.svg" alt="Youtube icon" />
 						</div>
 					</div>
-
-					<img src="/assets/images/roving-naija-logo.svg" alt="Roving naija logo" />
+					<Link href="/">
+						<img src="/assets/images/roving-naija-logo.svg" alt="Roving naija logo" />
+					</Link>
 
 					<div className="w-fit font-Cormorant">
-						<Link href="/login">
+						<Link href="/auth/login">
 							<Button className="mr-3 w-[165px] bg-app-dark text-white" size="lg">
 								REGISTER
 							</Button>
