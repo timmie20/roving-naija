@@ -1,6 +1,6 @@
 import React from "react"
 import styles from "./pricing.module.css"
-import Appbar from "@/components/shared/appbar"
+import MainLayout from "@/components/app/MainLayout"
 export default function page() {
 	const plans = [
 		{
@@ -49,8 +49,7 @@ export default function page() {
 		},
 	]
 	return (
-		<>
-			<Appbar />
+		<MainLayout>
 			<section
 				className={`${styles.pricing_bg} flex h-[347px] w-full items-center justify-center`}>
 				<p className="font-Cormorant text-5xl text-white">PRICING PLAN</p>
@@ -63,7 +62,7 @@ export default function page() {
 				<div className="flex flex-wrap justify-center">
 					{plans.map((plan, index) => (
 						<div key={index} className="m-4 w-64 rounded-lg bg-[#E4FFE7] p-6 shadow-lg">
-							<h2 className="mb-4 text-center">{plan.name}</h2>
+							<h2 className="mb-4 text-center font-Poppins">{plan.name}</h2>
 							<p className="mb-4 text-center text-2xl font-medium">{plan.price}</p>
 							<p className="mb-4 text-start text-xs italic text-gray-700">This plan gets</p>
 							<ul className="mb-6">
@@ -93,6 +92,6 @@ export default function page() {
 					))}
 				</div>
 			</div>
-		</>
+		</MainLayout>
 	)
 }

@@ -6,6 +6,7 @@ import logo from "@/public/assets/images/roving-naija-logo.svg"
 import { Button } from "@/components/ui/button"
 import Register from "@/components/auth/Register"
 import Login from "@/components/auth/Login"
+import Link from "next/link"
 
 type FormType = "register" | "login"
 
@@ -22,7 +23,9 @@ export default function page() {
 				<div
 					className={`${styles.glass_morph_effect} h-full w-full max-w-[651px] rounded-lg py-3 shadow-lg`}>
 					<div className="mx-auto grid w-full max-w-md place-items-center">
-						<Image src={logo} alt="Roving naija logo" priority />
+						<Link href="/">
+							<Image src={logo} alt="Roving naija logo" priority />
+						</Link>
 
 						<div className="mt-4 flex justify-between gap-4">
 							<Button

@@ -47,9 +47,11 @@ export default function Appbar() {
 					<img src="/assets/images/roving-naija-logo.svg" alt="Roving naija logo" />
 
 					<div className="w-fit font-Cormorant">
-						<Button className="mr-3 w-[165px] bg-app-dark text-white" size="lg">
-							REGISTER
-						</Button>
+						<Link href="/login">
+							<Button className="mr-3 w-[165px] bg-app-dark text-white" size="lg">
+								REGISTER
+							</Button>
+						</Link>
 						<Button variant="custom" size="lg">
 							LOGIN
 						</Button>
