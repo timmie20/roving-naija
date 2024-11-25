@@ -1,72 +1,95 @@
 import React from "react"
+import { Button } from "../ui/button"
+import Link from "next/link"
+import {
+	NavigationMenu,
+	NavigationMenuContent,
+	NavigationMenuIndicator,
+	NavigationMenuItem,
+	NavigationMenuLink,
+	NavigationMenuList,
+	NavigationMenuTrigger,
+	NavigationMenuViewport,
+	navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu"
+
+const navigation = [
+	{ name: "Home", path: "/" },
+	{ name: "News", path: "/news" },
+	{ name: "Politics", path: "/Politics" },
+	{ name: "Play game", path: "/play-game", icon: "" },
+	{ name: "Business", path: "/business" },
+	{ name: "Entertaiment", path: "/entertainment" },
+	{ name: "Health", path: "/health" },
+	{ name: "Contact us", path: "/contact-us" },
+	{ name: "Adverise with us", path: "/advert" },
+	{ name: "Pricing", path: "/pricing" },
+]
 
 export default function Appbar() {
-	const navigation = [
-		{ name: "home", href: "/" },
-		{ name: "n", href: "/about" },
-		{ name: "services", href: "" },
-		{ name: "patrons & partners", href: "/patrons-and-partners" },
-		{ name: "blog", href: "/blog" },
-		{ name: "contact", href: "/contact" },
-		{ name: "contact", href: "/contact" },
-		{ name: "contact", href: "/contact" },
-	]
 	return (
 		<>
-			<div className="w-full">
-				<header className="border-b border-gray-200 bg-white py-4">
-					<div className="container mx-auto flex items-center justify-between">
-						<div className="text-sm text-gray-600">Wednesday, November 20th 2024</div>
-						<div className="flex space-x-4"></div>
-						<div className="flex items-center space-x-4">
-							<img src="https://placehold.co/100x50" alt="Roving Naija Logo" className="h-10" />
-							<div className="flex space-x-2">
-								<button className="bg-black px-4 py-2 text-white">REGISTER</button>
-								<button className="border border-black px-4 py-2 text-black">LOGIN</button>
-							</div>
+			<header className="relative w-full bg-white">
+				<div className="flex items-center justify-between px-6 py-2">
+					<div className="w-fit">
+						<p className="font-Cormorant text-sm font-bold">Wednesday, November 20th 2024</p>
+						<div className="mt-3 inline-flex items-center gap-3">
+							<img src="/assets/icons/facebook.svg" alt="Facebook icon" />
+							<img src="/assets/icons/instagram.svg" alt="Instagram icon" />
+							<img src="/assets/icons/linkedin.svg" alt="Linkedin icon" />
+							<img src="/assets/icons/tiktok.svg" alt="Tiktok icon" />
+							<img src="/assets/icons/whatsapp.svg" alt="whatsapp icon" />
+							<img src="/assets/icons/x_logo.svg" alt="X icon" />
+							<img src="/assets/icons/youtube.svg" alt="Youtube icon" />
 						</div>
 					</div>
-				</header>
-				<nav className="border-t border-gray-200 bg-white py-2">
-					<div className="container mx-auto flex items-center justify-between">
-						<div className="flex space-x-6">
-							<a href="#" className="text-black">
-								Home
-							</a>
-							<div className="relative">
-								<a href="#" className="text-black">
-									News <i className="fas fa-chevron-down"></i>
-								</a>
-							</div>
-							<a href="#" className="text-black">
-								Politics
-							</a>
-							<a href="#" className="text-black">
-								Sports
-							</a>
-							<a href="#" className="text-black">
-								Play game <i className="fas fa-gamepad"></i>
-							</a>
-							<a href="#" className="text-black">
-								Business
-							</a>
-							<a href="#" className="text-black">
-								Entertainment
-							</a>
-							<div className="relative">
-								<a href="#" className="text-black">
-									More <i className="fas fa-chevron-down"></i>
-								</a>
-							</div>
-							<a href="#" className="text-black">
-								Contact us
-							</a>
-							<a href="#" className="text-black">
-								Advertise with us
-							</a>
-						</div>
+
+					<img src="/assets/images/roving-naija-logo.svg" alt="Roving naija logo" />
+
+					<div className="w-fit font-Cormorant">
+						<Button className="mr-3 w-[165px] bg-app-dark text-white" size="lg">
+							REGISTER
+						</Button>
+						<Button variant="custom" size="lg">
+							LOGIN
+						</Button>
 					</div>
-				</nav>
+				</div>
+			</header>
+
+			<div className="sticky top-0 z-20 max-h-fit w-full border-[1px] border-primary-light bg-white py-7 shadow-lg">
+				<NavigationMenu className="mx-auto w-full max-w-[1300px] text-base">
+					<NavigationMenuList>
+						{navigation.map((navItem) =>
+							navItem.name === "News" ? (
+								<NavigationMenuItem key={navItem.name}>
+									<NavigationMenuTrigger>{navItem.name}</NavigationMenuTrigger>
+									<NavigationMenuContent>
+										<ul className="w-36 p-3">
+											<li>
+												<Link href="/">some link</Link>
+											</li>
+											<li>
+												<Link href="/">some link</Link>
+											</li>
+											<li>
+												<Link href="/">some link</Link>
+											</li>
+										</ul>
+									</NavigationMenuContent>
+								</NavigationMenuItem>
+							) : (
+								<NavigationMenuItem key={navItem.name}>
+									<Link href={navItem.path} legacyBehavior passHref>
+										<NavigationMenuLink className={navigationMenuTriggerStyle()}>
+											{navItem.name}
+										</NavigationMenuLink>
+									</Link>
+								</NavigationMenuItem>
+							)
+						)}
+					</NavigationMenuList>
+				</NavigationMenu>
 			</div>
 		</>
 	)

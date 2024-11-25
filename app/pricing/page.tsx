@@ -1,5 +1,6 @@
 import React from "react"
 import styles from "./pricing.module.css"
+import Appbar from "@/components/shared/appbar"
 export default function page() {
 	const plans = [
 		{
@@ -49,13 +50,14 @@ export default function page() {
 	]
 	return (
 		<>
+			<Appbar />
 			<section
 				className={`${styles.pricing_bg} flex h-[347px] w-full items-center justify-center`}>
 				<p className="font-Cormorant text-5xl text-white">PRICING PLAN</p>
 			</section>
 
 			<div className="container mx-auto py-12">
-				<h1 className="font-Cormorant mb-8 text-center text-5xl font-bold">
+				<h1 className="mb-8 text-center font-Cormorant text-5xl font-bold">
 					Choose the plan that is Best for you!
 				</h1>
 				<div className="flex flex-wrap justify-center">
@@ -84,7 +86,7 @@ export default function page() {
 									</li>
 								))}
 							</ul>
-							<button className="font-Inter w-full rounded bg-secondary-darker px-4 py-2 text-white">
+							<button className="w-full rounded bg-secondary-darker px-4 py-2 font-Inter text-white">
 								START PLAN NOW
 							</button>
 						</div>
