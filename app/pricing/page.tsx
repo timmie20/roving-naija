@@ -52,16 +52,16 @@ export default function page() {
 		<MainLayout>
 			<section
 				className={`${styles.pricing_bg} flex h-[347px] w-full items-center justify-center`}>
-				<p className="font-Cormorant text-5xl text-white">PRICING PLAN</p>
+				<h1 className="font-Cormorant text-5xl text-white">PRICING PLAN</h1>
 			</section>
 
 			<div className="container mx-auto py-12">
 				<h1 className="mb-8 text-center font-Cormorant text-5xl font-bold">
 					Choose the plan that is Best for you!
 				</h1>
-				<div className="flex flex-wrap justify-center">
+				<div className="flex flex-wrap justify-center gap-6">
 					{plans.map((plan, index) => (
-						<div key={index} className="m-4 w-64 rounded-lg bg-[#E4FFE7] p-6 shadow-lg">
+						<div key={index} className="w-64 rounded-[8px] bg-[#E4FFE7] p-6 shadow-lg">
 							<h2 className="mb-4 text-center font-Poppins">{plan.name}</h2>
 							<p className="mb-4 text-center text-2xl font-medium">{plan.price}</p>
 							<p className="mb-4 text-start text-xs italic text-gray-700">This plan gets</p>
