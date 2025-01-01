@@ -24,26 +24,24 @@ export default function Trending() {
 		},
 	]
 	return (
-		<>
-			<div className="h-fit max-h-[505px]">
-				<div className="relative inline-flex items-center gap-2 pb-4">
-					<span className="font-base font-Poppins font-medium">Trending</span>
-					<img src="/assets/icons/trend-up.svg" />
-				</div>
-
-				<aside className="space-y-4 border-[1px] border-neutral-200 py-6">
-					{trendingObj.map((trend: TrendingNews) => (
-						<TrendingNewsPreview trend={trend} key={trend.id} />
-					))}
-
-					<div className="flex items-center justify-center">
-						<button className="w=full rounded-[8px] border-[1px] border-primary-normal p-1 px-20 text-xs">
-							More
-						</button>
-					</div>
-				</aside>
+		<div className="">
+			<div className="relative inline-flex items-center gap-2 pb-4">
+				<span className="font-base font-Poppins font-medium">Trending</span>
+				<img src="/assets/icons/trend-up.svg" />
 			</div>
-		</>
+
+			<div className="space-y-4 border-[1px] border-neutral-200 py-6">
+				{trendingObj.map((trend: TrendingNews) => (
+					<TrendingNewsPreview trend={trend} key={trend.id} />
+				))}
+
+				<div className="flex items-center justify-center">
+					<button className="w=full rounded-[8px] border-[1px] border-primary-normal p-1 px-20 text-xs">
+						More
+					</button>
+				</div>
+			</div>
+		</div>
 	)
 }
 

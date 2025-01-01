@@ -1,4 +1,5 @@
 import React from "react"
+import { ScrollArea } from "./ui/scroll-area"
 
 export default function leaderBoard() {
 	const data = [
@@ -9,21 +10,21 @@ export default function leaderBoard() {
 		{ position: 5, name: "Timilehin Bad...", points: 1200, form: "neutral" },
 		{ position: 6, name: "Favour Ezeh", points: 1000, form: "down" },
 		{ position: 7, name: "Favour Ezeh", points: 1500, form: "neutral" },
-		{ position: 8, name: "Mark Obidiegwu", points: 1300, form: "up" },
-		{ position: 8, name: "Mark Obidiegwu", points: 1300, form: "up" },
-		{ position: 8, name: "Mark Obidiegwu", points: 1300, form: "up" },
-		{ position: 8, name: "Mark Obidiegwu", points: 1300, form: "up" },
+		{ position: 9, name: "Mark Obidiegwu", points: 1300, form: "up" },
+		{ position: 10, name: "Mark Obidiegwu", points: 1300, form: "up" },
+		{ position: 11, name: "Mark Obidiegwu", points: 1300, form: "up" },
+		{ position: 12, name: "Mark Obidiegwu", points: 1300, form: "up" },
 	]
 	return (
-		<div className="h-[505px] w-full">
+		<div className="w-full">
 			<div className="relative inline-flex items-center gap-2 pb-4">
-				<span className="font-base font-Poppins font-medium">Trending</span>
+				<span className="font-base font-Poppins font-medium">Leader Board</span>
 				<img src="/assets/icons/leaderboard.svg" />
 			</div>
 
-			<div className="min-w-full">
-				<table className="border-[1px] border-neutral-200">
-					<thead>
+			<ScrollArea className="h-full max-h-[490px] w-full border-[1px] border-neutral-200 pb-8">
+				<table className="w-full border-collapse">
+					<thead className="sticky top-0 bg-white">
 						<tr>
 							<th className="px-4 py-4 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
 								Position
@@ -39,36 +40,25 @@ export default function leaderBoard() {
 							</th>
 						</tr>
 					</thead>
-					<ScrollArea className="h-72 w-48 rounded-md border">
-						<div className="p-4">
-							<h4 className="mb-4 text-sm font-medium leading-none">Tags</h4>
-							{tags.map((tag) => (
-								<>
-									<div key={tag} className="text-sm">
-										{tag}
-									</div>
-									<Separator className="my-2" />
-								</>
-							))}
-						</div>
-					</ScrollArea>
-					<tbody className="">
+					<tbody>
 						{data.map((item, index) => (
-							<tr key={index} className={`border-t ${index >= 6 ? "opacity-50" : ""}`}>
+							<tr key={index} className="border-t">
 								<td className="px-4 py-3">
 									<span
-										className={`inline-block h-6 w-6 rounded-full text-center text-white ${index < 3 ? "bg-green-500" : "bg-gray-300"}`}>
+										className={`inline-block size-6 rounded-sm text-center text-white ${
+											index < 3 ? "bg-green-500" : "bg-gray-300"
+										}`}>
 										{item.position}
 									</span>
 								</td>
 								<td className="px-4 py-2">{item.name}</td>
 								<td className="px-4 py-2">{item.points}</td>
-								{/* <td className="px-4 py-2">{getFormIcon(item.form)}</td> */}
 							</tr>
 						))}
 					</tbody>
 				</table>
-			</div>
+				<div className="pointer-events-none absolute bottom-0 left-0 right-0 h-14 w-full bg-gradient-to-t from-white from-60% to-transparent"></div>
+			</ScrollArea>
 		</div>
 	)
 }
