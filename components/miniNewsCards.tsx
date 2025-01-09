@@ -3,11 +3,12 @@ import Image from "next/image"
 export function MiniNewsCards() {
 	return (
 		<>
-			<div className="mx-auto h-fit w-fit border border-neutral-200 p-4">
+			<div className="mx-auto h-[168px] w-fit border border-neutral-200 p-4">
 				<div className="flex gap-3">
 					<Image
 						src="/assets/images/frame1.jpg"
 						alt="News description image"
+						className="flex-shrink-0"
 						width={130}
 						height={130}
 					/>

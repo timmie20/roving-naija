@@ -16,13 +16,13 @@ export default function leaderBoard() {
 		{ position: 12, name: "Mark Obidiegwu", points: 1300, form: "up" },
 	]
 	return (
-		<div className="w-full">
+		<div className="w-full max-w-[350px] flex-none">
 			<div className="relative inline-flex items-center gap-2 pb-4">
 				<span className="font-base font-Poppins font-medium">Leader Board</span>
 				<img src="/assets/icons/leaderboard.svg" />
 			</div>
 
-			<ScrollArea className="h-full max-h-[490px] w-full border-[1px] border-neutral-200 pb-8">
+			<ScrollArea className="h-full max-h-[500px] w-full border-[1px] border-neutral-200 pb-8">
 				<table className="w-full border-collapse">
 					<thead className="sticky top-0 bg-white">
 						<tr>

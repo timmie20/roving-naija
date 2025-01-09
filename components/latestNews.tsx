@@ -3,7 +3,7 @@ import React from "react"
 
 export default function LatestNews() {
 	return (
-		<div className="">
+		<div className="w-[710px] flex-1">
 			<div className="relative inline-flex items-center gap-2 pb-4">
 				<span className="font-base font-Poppins font-medium">Latest News</span>
 				<img src="/assets/icons/fire.svg" />
