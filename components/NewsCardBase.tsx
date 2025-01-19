@@ -1,6 +1,6 @@
 import Image from "next/image"
 
-export function MiniNewsCards() {
+export function NewsCardBase() {
 	return (
 		<>
 			<div className="mx-auto h-[168px] w-fit border border-neutral-200 p-4">

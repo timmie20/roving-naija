@@ -1,9 +1,8 @@
-import React from "react"
-import styles from "./auth.module.css"
+"use client"
+import React, { useState } from "react"
 import {
 	Form,
 	FormControl,
-	FormDescription,
 	FormField,
 	FormItem,
 	FormLabel,
@@ -14,18 +13,24 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import { Button } from "../ui/button"
-import { FcGoogle } from "react-icons/fc"
+import { login } from "@/queries/auth"
+import { useAuthContext } from "@/context/AuthContext"
+import { toast } from "sonner"
 
 export default function Login<T>({
 	setFormType,
 }: {
 	setFormType: React.Dispatch<React.SetStateAction<T>>
 }) {
+	const [loading, setLoading] = useState(false)
+	const { loginUser } = useAuthContext()
 	const formSchema = z.object({
-		fullname: z.string().min(5, {
-			message: "Username must be at least 5 characters.",
+		// fullname: z.string().min(5, {
+		// 	message: "Username must be at least 5 characters.",
+		// }),
+		email: z.string().email({
+			message: "Invalid email address.",
 		}),
-
 		password: z
 			.string()
 			.min(8, { message: "Password must be at least 8 characters." })
@@ -40,15 +45,35 @@ export default function Login<T>({
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
-			fullname: "",
+			email: "",
 			password: "",
 		},
 	})
 
-	function onSubmit(values: z.infer<typeof formSchema>) {
-		// Do something with the form values.
-		// ✅ This will be type-safe and validated.
-		console.log(values)
+	const onSubmit = async (values: z.infer<typeof formSchema>) => {
+		setLoading(true)
+		try {
+			const result = await login(values)
+			if (result.message === "Login successful") {
+				loginUser(result)
+				toast.success(result.message)
+				console.log(result)
+			}
+			form.reset()
+			console.log(result)
+		} catch (error) {
+			console.log(error)
+			toast.error(error.response.data.error, {
+				description: "try creating an account",
+				action: {
+					label: "Undo",
+					onClick: () => console.log("Undo"),
+				},
+				position: "top-right",
+			})
+		} finally {
+			setLoading(false)
+		}
 	}
 	return (
 		<>
@@ -56,10 +81,10 @@ export default function Login<T>({
 				<form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-3">
 					<FormField
 						control={form.control}
-						name="fullname"
+						name="email"
 						render={({ field }) => (
 							<FormItem>
-								<FormLabel>Fullname or Username </FormLabel>
+								<FormLabel>Email</FormLabel>
 								<FormControl>
 									<Input
 										placeholder="John Doe"
@@ -98,11 +123,12 @@ export default function Login<T>({
 						<Button
 							variant="outline"
 							size="lg"
-							className="h-[58px] w-full max-w-48 bg-transparent text-lg font-normal text-white">
-							Sign in
+							className="h-[58px] w-full max-w-48 bg-transparent text-lg font-normal text-white"
+							disabled={loading}>
+							{loading ? "Please wait..." : "Sign in"}
 						</Button>
 						<p className="inline-flex items-center gap-2 font-normal text-app-white">
-							<span>Don't have an account?</span>
+							<span>Don&apos;t have an account?</span>
 							<span
 								className="cursor-pointer text-app-dark underline-offset-4 hover:underline"
 								onClick={() => setFormType("register" as T)}>

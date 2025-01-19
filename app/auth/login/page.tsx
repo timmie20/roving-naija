@@ -8,30 +8,34 @@ import Register from "@/components/auth/Register"
 import Login from "@/components/auth/Login"
 import Link from "next/link"
 
-type FormType = "register" | "login"
+type FormType = "register" | "login" | string
 
-export default function page() {
+export default function Page() {
 	const [formType, setFormType] = useState<FormType>("register")
 
-	function toggleFormType(e: any) {
-		const text = e.target.innerText.toLowerCase()
-		setFormType(text)
+	function toggleFormType(e: React.MouseEvent<HTMLButtonElement>) {
+		if (e.target && e.target instanceof HTMLElement) {
+			const text: string = e.target.innerText.toLowerCase()
+			setFormType(text)
+		}
 	}
 	return (
 		<>
-			<div className={`${styles.auth_bg} grid h-screen w-screen place-items-end px-6 py-3`}>
+			<div
+				className={`${styles.auth_bg} flex h-screen w-screen items-center justify-end lg:px-2`}>
 				<div
-					className={`${styles.glass_morph_effect} h-full w-full max-w-[651px] rounded-lg py-3 shadow-lg`}>
-					<div className="mx-auto grid w-full max-w-md place-items-center">
+					className={`${styles.glass_morph_effect} flex h-full w-full rounded-lg px-2 py-3 lg:max-h-[808px] lg:max-w-[651px] lg:border lg:border-app-white`}>
+					<div className="mx-auto flex w-full max-w-md flex-col items-center">
 						<Link href="/">
 							<Image src={logo} alt="Roving naija logo" priority />
 						</Link>
 
-						<div className="mt-4 flex justify-between gap-4">
+						<div className="mt-4 flex w-full flex-col justify-between gap-4 min-[375px]:flex-row">
 							<Button
 								variant="custom"
 								size="lg"
 								onClick={(e) => toggleFormType(e)}
+								className="w-full"
 								style={
 									formType === "register"
 										? { backgroundColor: "var(--app-dark)", color: "white" }
@@ -43,6 +47,7 @@ export default function page() {
 								variant="custom"
 								onClick={(e) => toggleFormType(e)}
 								size="lg"
+								className="w-full"
 								style={
 									formType === "login"
 										? { backgroundColor: "var(--app-dark)", color: "white" }
@@ -52,13 +57,13 @@ export default function page() {
 							</Button>
 						</div>
 
-						<h3 className="mt-5 font-medium text-app-white">
+						<h3 className="mt-3 font-Poppins text-base font-medium text-app-white">
 							{formType === "register"
 								? "You must be 18 or above to register"
 								: "Login to your RovingNaija account"}
 						</h3>
 
-						<div className="container mt-7 flex h-full w-full items-center justify-center">
+						<div className="mt-4 w-full">
 							{formType === "register" ? (
 								<Register setFormType={setFormType} />
 							) : (

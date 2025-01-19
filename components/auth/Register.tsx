@@ -1,5 +1,5 @@
-import React from "react"
-import styles from "./auth.module.css"
+"use client"
+import React, { useState } from "react"
 import {
 	Form,
 	FormControl,
@@ -14,12 +14,19 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import { Button } from "../ui/button"
 import { FcGoogle } from "react-icons/fc"
+import { register } from "@/queries/auth"
+import { toast } from "sonner"
+import { useAuthContext } from "@/context/AuthContext"
+// import { HttpError } from "@/types/types"
 
 export default function Register<T>({
 	setFormType,
 }: {
 	setFormType: React.Dispatch<React.SetStateAction<T>>
 }) {
+	const { loginUser } = useAuthContext()
+	const [loading, setLoading] = useState(false)
+
 	const formSchema = z.object({
 		fullname: z.string().min(5, {
 			message: "Username must be at least 5 characters.",
@@ -47,10 +54,27 @@ export default function Register<T>({
 		},
 	})
 
-	function onSubmit(values: z.infer<typeof formSchema>) {
-		// Do something with the form values.
-		// ✅ This will be type-safe and validated.
-		console.log(values)
+	const onSubmit = async (values: z.infer<typeof formSchema>) => {
+		setLoading(true)
+		try {
+			const result = await register(values)
+			if (result.message === "User registered successfully") {
+				loginUser(result)
+				toast.success(result.message)
+			}
+			form.reset()
+			console.log(result)
+		} catch (error) {
+			toast.error("Unable to login user", {
+				action: {
+					label: "Undo",
+					onClick: () => console.log("Undo"),
+				},
+				position: "top-right",
+			})
+		} finally {
+			setLoading(false)
+		}
 	}
 	return (
 		<>
@@ -108,12 +132,12 @@ export default function Register<T>({
 						)}
 					/>
 
-					<div className="flex flex-col items-center justify-center space-y-2 text-app-white">
+					<div className="flex flex-col items-center space-y-3 pt-5 text-app-white">
 						<Button
 							variant="outline"
-							size="lg"
-							className="h-[58px] w-full max-w-48 bg-transparent text-lg font-normal text-white">
-							Create Account
+							className="h-[58px] w-full max-w-[263px] bg-transparent text-lg font-normal text-white"
+							disabled={loading}>
+							{loading ? "please wait" : "Create Account"}
 						</Button>
 
 						<p className="inline-flex items-center gap-2 font-normal text-app-white">
@@ -128,7 +152,7 @@ export default function Register<T>({
 						<span>OR</span>
 
 						<Button
-							className="inline-flex items-center bg-transparent text-sm font-normal"
+							className="mt-2 inline-flex items-center bg-transparent text-sm font-normal"
 							variant="outline">
 							<FcGoogle size="25" />
 							<span>Sign up with Google</span>
