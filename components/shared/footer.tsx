@@ -4,48 +4,55 @@ import { Input } from "../ui/input"
 
 export default function Footer() {
 	return (
-		<footer className="w-full bg-neutral-400 pb-10 pt-20 text-white">
+		<footer className="w-full bg-neutral-400 px-4 pb-10 pt-20 text-white">
 			<div className="mx-auto w-full max-w-screen-xl">
 				<Link href="/">
 					<img src="/assets/images/roving-naija-logo.svg" alt="Roving naija logo" />
 				</Link>
-				<div className="mt-10 flex justify-between">
-					<div className="flex w-[30%] flex-col gap-5">
+				<div className="mt-10 flex flex-col justify-between gap-8 lg:flex-row lg:gap-0">
+					<div className="flex w-full flex-col sm:gap-5 lg:w-[30%]">
 						<div className="mb-4 inline-flex items-center gap-3">
 							<img src="/assets/icons/location.svg" alt="location icon" />
-							<p>3b Alegbe Close Mende, Maryland Lagos, Nigeria.</p>
+							<p className="text-sm sm:text-base">
+								3b Alegbe Close Mende, Maryland Lagos, Nigeria.
+							</p>
 						</div>
 						<div className="mb-4 inline-flex items-center gap-3">
 							<img src="/assets/icons/phone.svg" alt="Phone call icon" />
-							<p>081234568900</p>
+							<p className="text-sm sm:text-base">081234568900</p>
 						</div>
 						<div className="inline-flex items-center gap-3">
 							<img src="/assets/icons/mail.svg" alt="mail icon" />
-							<p>rovingnaija@gmail.com</p>
+							<p className="text-sm sm:text-base">rovingnaija@gmail.com</p>
 						</div>
 					</div>
-					<div className="flex flex-col gap-5">
-						<p className="mb-4">Play Educative Games</p>
-						<p className="mb-4">Advert rates</p>
-						<p className="mb-4">Subscription</p>
-						<p>Instructions</p>
-					</div>
-					<div className="flex flex-col gap-5">
-						<p className="mb-4">Collaborate with Us</p>
-						<p className="mb-4">Write to Us</p>
-						<p className="mb-4">About Us</p>
-					</div>
-					<div className="flex flex-col gap-5">
-						<p className="mb-4">Terms & Conditions</p>
-						<p className="mb-4">Privacy Policy</p>
-						<p>FAQ</p>
+
+					<div className="flex w-full justify-between lg:w-[60%]">
+						<div className="flex flex-col gap-5">
+							<p className="mb-4 text-balance text-sm sm:text-base">Play Educative Games</p>
+							<p className="mb-4 text-balance text-sm sm:text-base">Advert rates</p>
+							<p className="mb-4 text-balance text-sm sm:text-base">Subscription</p>
+							<p className="text-sm sm:text-base">Instructions</p>
+						</div>
+						<div className="flex flex-col gap-5">
+							<p className="mb-4 text-balance text-sm sm:text-base">Collaborate with Us</p>
+							<p className="mb-4 text-balance text-sm sm:text-base">Write to Us</p>
+							<p className="mb-4 text-balance text-sm sm:text-base">About Us</p>
+						</div>
+						<div className="flex flex-col gap-5">
+							<p className="mb-4 text-balance text-sm sm:text-base">Terms & Conditions</p>
+							<p className="mb-4 text-balance text-sm sm:text-base">Privacy Policy</p>
+							<p>FAQ</p>
+						</div>
 					</div>
 				</div>
 
-				<div className="mt-16 flex items-end justify-between">
-					<p className="">© 2024 RovingNaija Limited - All Rights Reserved</p>
+				<div className="mt-16 flex flex-col-reverse items-center justify-between md:flex-row lg:items-end">
+					<p className="mt-6 text-center md:mt-0">
+						© 2024 RovingNaija Limited - All Rights Reserved
+					</p>
 
-					<div className="flex w-[30%] flex-col space-y-5">
+					<div className="flex w-full flex-col space-y-5 md:w-[30%]">
 						<p>Subscribe to our Newsletter</p>
 						<Input
 							type="email"

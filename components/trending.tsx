@@ -24,7 +24,7 @@ export default function Trending() {
 		},
 	]
 	return (
-		<div className="h-full w-[350px] flex-none">
+		<div className="h-full w-fit flex-none lg:max-w-[350px]">
 			<div className="inline-flex items-center gap-2 pb-4">
 				<span className="font-base font-Poppins font-medium">Trending</span>
 				<img src="/assets/icons/trend-up.svg" />
@@ -48,7 +48,7 @@ export default function Trending() {
 function TrendingNewsPreview({ trend }: { trend: TrendingNews }) {
 	return (
 		<>
-			<div className="flex w-fit items-start justify-between gap-3 border-t-[1px] border-primary-normal pt-4 first:border-none first:pt-0">
+			<div className="flex w-full items-start gap-3 border-t-[1px] border-primary-normal pt-4 first:border-none first:pt-0">
 				<div className="flex flex-shrink-0 flex-col">
 					<Image
 						src={trend.imgUrl}
@@ -71,7 +71,7 @@ function TrendingNewsPreview({ trend }: { trend: TrendingNews }) {
 					</div>
 				</div>
 
-				<h4 className="line-clamp-4 text-balance font-Poppins font-normal decoration-inherit hover:cursor-pointer hover:underline hover:decoration-2">
+				<h4 className="line-clamp-4 text-balance text-left font-Poppins text-base font-normal hover:cursor-pointer hover:underline hover:decoration-2">
 					{trend.headline}{" "}
 				</h4>
 			</div>

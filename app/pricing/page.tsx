@@ -52,7 +52,7 @@ export default function page() {
 		<MainLayout>
 			<section
 				className={`${styles.pricing_bg} flex h-[347px] w-full items-center justify-center`}>
-				<h1 className="font-Cormorant text-5xl text-white">PRICING PLAN</h1>
+				<h1 className="font-Cormorant text-5xl text-white">SUBSCRIPTION PLAN</h1>
 			</section>
 
 			<div className="container mx-auto py-12">

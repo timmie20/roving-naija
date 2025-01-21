@@ -26,7 +26,7 @@ export default function NewsCardSmall() {
 				</div>
 			</div>
 
-			<h4 className="line-clamp-3 text-balance font-Poppins font-normal decoration-inherit hover:cursor-pointer hover:underline hover:decoration-2">
+			<h4 className="links line-clamp-3 text-balance font-Poppins font-normal decoration-inherit hover:cursor-pointer hover:underline hover:decoration-2">
 				Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis ratione recusandae
 				facilis error accusantium laboriosam, nulla tenetur? Quasi nesciunt voluptas, dolorum
 				vel, molestiae corporis doloribus atque rem nobis, quibusdam recusandae?

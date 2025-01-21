@@ -4,7 +4,7 @@ import Image from "next/image"
 export default function NewsCardLg() {
 	return (
 		<div>
-			<div className="relative h-[360px] w-full">
+			<div className="relative h-[200px] w-full lg:h-[360px]">
 				<Image
 					src="/assets/images/frame4.png"
 					alt="Latest news image"
@@ -13,19 +13,19 @@ export default function NewsCardLg() {
 					sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
 				/>
 			</div>
-			<div className="flex h-[132px] flex-col justify-between border border-[#959595] p-4">
-				<h3 className="text-wrap text-3xl font-bold text-app-dark">
-					Malcolm Wins Edo state Governorship election.
+			<div className="flex h-[86px] flex-col justify-between border border-[#959595] p-4 lg:h-[132px]">
+				<h3 className="links line-clamp-2 text-base font-bold text-app-dark md:line-clamp-none md:text-3xl">
+					Malcolm Wins Edo state Governorship election.{" "}
 				</h3>
-				<div className="lex items-center justify-between">
-					<aside className="inline-flex items-center gap-3">
+				<div className="flex items-center justify-between">
+					<aside className="flex items-center gap-3">
 						<i>
-							<small>By Mark Obidiegwu</small>
+							<small className="text-[8px] sm:text-xs">By Mark Obidiegwu</small>
 						</i>
-						<span className="inline-flex items-center gap-1">
+						<span className="flex items-center gap-1">
 							<img src="/assets/icons/clock.svg" alt="Clock icon" />
 							<i>
-								<small>20 November 2024 .</small>
+								<small className="text-[8px] sm:text-xs">20 November 2024 .</small>
 							</i>
 						</span>
 					</aside>

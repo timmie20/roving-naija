@@ -14,7 +14,7 @@ export default function NewsSectionExtras({ title }: { title: string }) {
 					{Array.from({ length: 3 }).map((_, i) => (
 						<h4
 							key={i}
-							className="line-clamp-2 text-balance font-Poppins font-normal decoration-inherit hover:cursor-pointer hover:underline hover:decoration-2">
+							className="line-clamp-2 text-balance border-b border-primary-normal font-Poppins font-normal decoration-inherit hover:cursor-pointer hover:underline hover:decoration-2">
 							Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quis, ipsa consequuntur!
 							Minus culpa repudiandae vitae provident veritatis tempor
 						</h4>

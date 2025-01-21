@@ -16,13 +16,13 @@ export default function leaderBoard() {
 		{ position: 12, name: "Mark Obidiegwu", points: 1300, form: "up" },
 	]
 	return (
-		<div className="w-full max-w-[350px] flex-none">
+		<div className="w-full flex-none px-3 lg:max-w-[370px]">
 			<div className="relative inline-flex items-center gap-2 pb-4">
 				<span className="font-base font-Poppins font-medium">Leader Board</span>
 				<img src="/assets/icons/leaderboard.svg" />
 			</div>
 
-			<ScrollArea className="h-full max-h-[500px] w-full border-[1px] border-neutral-200 pb-8">
+			<div className="relative h-full max-h-[500px] w-full overflow-y-auto border-[1px] border-neutral-200 pb-8">
 				<table className="w-full border-collapse">
 					<thead className="sticky top-0 bg-white">
 						<tr>
@@ -57,8 +57,8 @@ export default function leaderBoard() {
 						))}
 					</tbody>
 				</table>
-				<div className="pointer-events-none absolute bottom-0 left-0 right-0 h-14 w-full bg-gradient-to-t from-white from-60% to-transparent"></div>
-			</ScrollArea>
+				{/* <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-14 w-full bg-gradient-to-t from-white from-60% to-transparent"></div> */}
+			</div>
 		</div>
 	)
 }

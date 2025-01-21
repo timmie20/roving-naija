@@ -196,3 +196,7 @@ input[type="search"]::-webkit-search-results-decoration {
 		@apply bg-background text-foreground;
 	}
 }
+
+.links {
+	@apply hover:cursor-pointer hover:underline hover:decoration-2;
+}

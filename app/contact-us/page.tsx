@@ -6,8 +6,8 @@ export default function page() {
 	return (
 		<>
 			<MainLayout>
-				<section className="container h-screen">
-					<div className="mx-auto flex h-full w-full max-w-screen-xl items-center justify-center">
+				<section className="container h-full pb-10">
+					<div className="mx-auto flex h-screen w-full max-w-screen-xl flex-col-reverse items-center justify-center lg:flex-row">
 						<div className="w-full max-w-[570px] px-3">
 							<h1 className="mb-4 text-5xl font-bold">CONTACT US</h1>
 							<p className="mb-4">

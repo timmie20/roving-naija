@@ -9,10 +9,10 @@ export default function NewsCardMedium() {
 				className="w-full"
 			/>
 			<div className="p-4">
-				<h2 className="mb-2 text-pretty font-Poppins text-lg font-medium">
+				<h2 className="links mb-2 text-pretty font-Poppins text-lg font-medium">
 					Lagos state governor’s wife seen jumping danfo.
 				</h2>
-				<p className="mb-4 text-gray-700">
+				<p className="links mb-4 text-gray-700">
 					Lagos state governor’s wife seen jumping danfo after being called out for...
 				</p>
 				<div className="flex items-center text-sm text-gray-500">

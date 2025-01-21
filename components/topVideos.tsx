@@ -4,7 +4,7 @@ import Image from "next/image"
 export default function TopVideos() {
 	return (
 		<div className="mt-10 w-full">
-			<div className="inline-flex items-center gap-2 pb-4">
+			<div className="inline-flex items-center gap-2 px-3 pb-4">
 				<span className="font-base font-Poppins text-lg font-medium">Top Videos</span>
 				<img src="/assets/icons/top-video.svg" alt="Top videos icon" />
 			</div>
@@ -22,33 +22,31 @@ export default function TopVideos() {
 	)
 }
 
-function VideoCard() {
+export function VideoCard() {
 	return (
-		<div className="flex h-fit w-[450px] gap-4 p-2">
-			<div className="relative shrink-0">
+		<div className="flex h-fit w-[200px] flex-col gap-4 p-2 md:w-[450px] md:flex-row">
+			<div className="relative h-[89px] max-h-[163px] w-full max-w-[200px] shrink-0 md:h-[163px]">
 				<Image
 					src="/assets/images/frame3.jpg"
 					alt="News description"
 					className="object-cover"
-					width={200}
-					height={163}
+					fill
 				/>
 				<div className="absolute inset-0 bg-black opacity-50"></div>
 
 				<img
 					src="/assets/icons/video-icon.svg"
 					alt="video icon"
-					className="absolute inset-0 h-10 w-10"
+					className="absolute h-10 w-10"
 					style={{ top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}
 				/>
 			</div>
 
 			<div className="flex flex-col justify-between">
-				<h3 className="text-balance font-Cormorant text-[20px] font-bold">
+				<h3 className="links line-clamp-2 text-balance font-Cormorant text-sm font-bold md:line-clamp-4 md:text-[20px]">
 					Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam incidunt corrupti
-					necessitatibus,
 				</h3>
-				<span className="text-xs italic text-gray-500">By Timilehin</span>
+				<span className="mt-2 text-xs italic text-gray-500 md:mt-0">By Timilehin</span>
 			</div>
 		</div>
 	)

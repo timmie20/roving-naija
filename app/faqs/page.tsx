@@ -12,7 +12,9 @@ export default function page() {
 		<MainLayout>
 			<section
 				className={`${styles.faq_bg} flex h-[347px] w-full items-center justify-center`}>
-				<h1 className="font-Cormorant text-5xl text-white">FREQUENTLY ASKED QUESTIONS</h1>
+				<h1 className="font-Cormorant text-xl font-bold text-white md:text-5xl">
+					FREQUENTLY ASKED QUESTIONS
+				</h1>
 			</section>{" "}
 			<div className="mx-auto max-w-screen-xl py-8">
 				<AccordionDemo />
@@ -26,21 +28,24 @@ function AccordionDemo() {
 		{
 			id: "one",
 			head: "why roving naija",
-			Content: "shey me i know ni",
+			Content:
+				"	Lorem ipsum dolor sit amet: consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, ",
 		},
 		{
 			id: "two",
 			head: "why roving naija",
-			Content: "you fit ask the designer",
+			Content:
+				"	Lorem ipsum dolor sit amet: consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, ",
 		},
 		{
 			id: "three",
 			head: "why roving naija",
-			Content: "no they question me this guy",
+			Content:
+				"	Lorem ipsum dolor sit amet: consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, ",
 		},
 	]
 	return (
-		<Accordion type="single" collapsible className="w-full space-y-4">
+		<Accordion type="multiple" className="w-full space-y-4 px-3">
 			{accordionContent.map((accordion) => (
 				<AccordionItem
 					value={accordion.id}

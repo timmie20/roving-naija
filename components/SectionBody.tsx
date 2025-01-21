@@ -3,6 +3,7 @@ import Image from "next/image"
 import NewsCardMedium from "./NewsCardMedium"
 import NewsCardLg from "./NewsCardLg"
 import Ads from "./Ads"
+import NewsCardSmall from "./NewsCardSmall"
 
 export default function SectionBody({ hasAdvert }: { hasAdvert: boolean }) {
 	return (
@@ -12,20 +13,25 @@ export default function SectionBody({ hasAdvert }: { hasAdvert: boolean }) {
 
 export const SectionWithAds = () => {
 	return (
-		<div className="flex w-full gap-4">
+		<div className="flex w-full flex-col gap-4 lg:flex-row">
 			<div className="flex-1">
 				<div className="w-full flex-1">
 					<NewsCardLg />
 
-					<div className="mt-8 flex gap-4">
+					<div className="mt-8 hidden gap-4 sm:flex">
 						<NewsCardMedium />
 						<NewsCardMedium />
+					</div>
+
+					<div className="mt-8 flex flex-col gap-4 sm:hidden">
+						<NewsCardSmall />
+						<NewsCardSmall />
 					</div>
 				</div>
 			</div>
 
-			<div className="flex max-w-[347px] flex-col gap-4">
-				<div className="flex-1">
+			<div className="flex flex-col-reverse items-center gap-4 sm:flex-row-reverse lg:flex-col">
+				<div className="w-full flex-1">
 					<Ads />
 				</div>
 
@@ -50,8 +56,8 @@ export const SectionWithoutAds = () => {
 	return (
 		<>
 			<div className="w-full">
-				<div className="flex w-full justify-between gap-6">
-					<div className="relative h-[396px] w-full max-w-[610px]">
+				<div className="flex w-full flex-col items-center justify-between gap-6 lg:flex-row">
+					<div className="relative h-[200px] w-full max-w-[610px] md:h-[396px]">
 						<Image
 							src="/assets/images/Frame 381.png"
 							alt="iamge of something"
@@ -60,11 +66,11 @@ export const SectionWithoutAds = () => {
 						/>
 					</div>
 					<div className="space-y-6">
-						<h1 className="text-balance text-4xl/10 font-semibold">
+						<h1 className="links text-wrap text-2xl font-semibold lg:text-4xl/10">
 							Malcolm Wins Edo state Governorship election.
 						</h1>
 
-						<p className="text-balance font-Poppins">
+						<p className="links line-clamp-3 text-wrap font-Poppins text-sm md:line-clamp-none md:text-base">
 							It is a long established fact that a reader will be distracted by the readable
 							content of a page when looking at its layout. The point of using Lorem Ipsum is
 							that it has a more-or-less
@@ -72,10 +78,16 @@ export const SectionWithoutAds = () => {
 					</div>
 				</div>
 
-				<div className="mt-6 flex gap-4">
+				<div className="mt-6 hidden gap-4 md:flex">
 					<NewsCardMedium />
 					<NewsCardMedium />
 					<NewsCardMedium />
+				</div>
+
+				<div className="mt-4 flex flex-col gap-4 md:hidden">
+					<NewsCardSmall />
+					<NewsCardSmall />
+					<NewsCardSmall />
 				</div>
 			</div>
 		</>
