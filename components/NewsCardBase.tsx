@@ -1,6 +1,7 @@
+import { Post } from "@/queries/posts"
 import Image from "next/image"
 
-export function NewsCardBase() {
+export function NewsCardBase({ post }: { post: Post }) {
 	return (
 		<>
 			<div className="mx-auto h-fit w-fit border border-neutral-200 p-4">
@@ -14,9 +15,7 @@ export function NewsCardBase() {
 						/>
 					</div>
 					<div className="flex flex-col justify-between font-Cormorant">
-						<h2 className="links text-xs font-bold md:text-base xl:text-xl">
-							Nigeria to donate 100 million to Valencia flood victims
-						</h2>
+						<h2 className="links text-xs font-bold md:text-base xl:text-xl">{post.title}</h2>
 						<div className="inline-flex items-center gap-1 text-gray-600">
 							<img src="/assets/icons/clock.svg" alt="clock icon" />
 							<span className="text-[8px] italic sm:text-xs">20 November 2024.</span>

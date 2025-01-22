@@ -16,9 +16,6 @@ export default function NewsSectionContainer({
 }) {
 	const router = useRouter()
 
-	const route = (id: number) => {
-		router.push(`${id}`)
-	}
 	return (
 		<section className="w-full px-3 xl:px-0" id={id}>
 			<SectionHeader type={type} />
@@ -28,7 +25,7 @@ export default function NewsSectionContainer({
 				<Button
 					className="mt-8 h-12 w-full border border-primary-dark text-base text-primary-dark md:h-16 lg:max-w-[560px]"
 					variant="outline"
-					onClick={() => route(1)}>
+					onClick={() => router.push(`/topics/${id}`)}>
 					More on this section
 				</Button>
 			</div>

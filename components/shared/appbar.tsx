@@ -69,7 +69,7 @@ export default function Appbar() {
 					</div>
 				</div>
 
-				<div className="max-h-fit border-[1px] border-primary-light bg-white py-7 shadow-lg">
+				<div className="max-h-fit border-[1px] border-primary-light py-7 shadow-lg">
 					<div className="mx-auto flex max-w-screen-xl items-center justify-between gap-4 overflow-x-auto px-6 lg:gap-0 xl:px-0">
 						{navigation.map((navItem) => (
 							<Link key={navItem.name} href={navItem.path} className="links text-nowrap">

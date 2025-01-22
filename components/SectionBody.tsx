@@ -56,25 +56,29 @@ export const SectionWithoutAds = () => {
 	return (
 		<>
 			<div className="w-full">
-				<div className="flex w-full flex-col items-center justify-between gap-6 lg:flex-row">
-					<div className="relative h-[200px] w-full max-w-[610px] md:h-[396px]">
+				<div className="flex flex-col rounded-lg p-6 md:flex-row">
+					<div className="relative h-[200px] w-full shrink-0 rounded-lg md:h-[400px] md:w-1/2">
 						<Image
 							src="/assets/images/Frame 381.png"
-							alt="iamge of something"
-							layout="fill"
-							objectFit="cover"
+							alt="Portrait of a man wearing glasses and a blue shirt"
+							fill
 						/>
 					</div>
-					<div className="space-y-6">
-						<h1 className="links text-wrap text-2xl font-semibold lg:text-4xl/10">
+					<div className="mt-4 md:ml-6 md:mt-0">
+						<h1 className="mb-4 text-2xl font-bold md:text-3xl">
 							Malcolm Wins Edo state Governorship election.
 						</h1>
-
-						<p className="links line-clamp-3 text-wrap font-Poppins text-sm md:line-clamp-none md:text-base">
+						<p className="mb-4 text-gray-700">
 							It is a long established fact that a reader will be distracted by the readable
 							content of a page when looking at its layout. The point of using Lorem Ipsum is
 							that it has a more-or-less
 						</p>
+						<div className="flex items-center text-gray-600">
+							<span className="italic">By Mark Obidiegwu</span>
+							<span className="mx-2">|</span>
+							<i className="far fa-clock mr-2"></i>
+							<span>20 November 2024.</span>
+						</div>
 					</div>
 				</div>
 

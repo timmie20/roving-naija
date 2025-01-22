@@ -1,7 +1,22 @@
+import { Post } from "@/queries/posts"
 import Image from "next/image"
 import React from "react"
 
-export default function LatestNews() {
+export default function LatestNews({ posts }: { posts: Post[] }) {
+	return (
+		<>
+			{posts?.length ? (
+				posts
+					.filter((post) => post.priority === 1)
+					.map((post) => <LatestNewsPreview key={post.id} post={post} />)
+			) : (
+				<div>No posts available</div>
+			)}
+		</>
+	)
+}
+
+export function LatestNewsPreview({ post }: { post: Post }) {
 	return (
 		<div className="flex-1">
 			<div className="relative inline-flex items-center gap-2 pb-4">
@@ -9,19 +24,15 @@ export default function LatestNews() {
 				<img src="/assets/icons/fire.svg" />
 			</div>
 			<div className="relative h-[180px] w-full sm:h-[360px]">
-				<Image
-					src="/assets/images/Frame 381.png"
-					alt="Latest news image"
-					fill
-					priority
-					// sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-				/>
+				<Image src="/assets/images/Frame 381.png" alt="Latest news image" fill priority />
 			</div>
 			<div className="p-4 shadow-md">
 				<h3 className="links line-clamp-2 text-wrap text-base font-bold text-app-dark md:line-clamp-none md:text-3xl">
-					President Tinubu shares one hundred thousand naira for staffs of Martad Holdings
-					Limited.
+					{post.title}
 				</h3>
+
+				<p className="mt-4 line-clamp-3 text-sm text-gray-600">{post.content}</p>
+
 				<div className="mt-4 flex items-center justify-between">
 					<aside className="flex items-center gap-3">
 						<i>
