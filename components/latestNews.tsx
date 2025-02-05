@@ -1,5 +1,7 @@
+"use client"
 import { Post } from "@/queries/posts"
 import Image from "next/image"
+import { useRouter } from "next/navigation"
 import React from "react"
 
 export default function LatestNews({ posts }: { posts: Post[] }) {
@@ -17,6 +19,7 @@ export default function LatestNews({ posts }: { posts: Post[] }) {
 }
 
 export function LatestNewsPreview({ post }: { post: Post }) {
+	const router = useRouter()
 	return (
 		<div className="flex-1">
 			<div className="relative inline-flex items-center gap-2 pb-4">
@@ -27,7 +30,9 @@ export function LatestNewsPreview({ post }: { post: Post }) {
 				<Image src="/assets/images/Frame 381.png" alt="Latest news image" fill priority />
 			</div>
 			<div className="p-4 shadow-md">
-				<h3 className="links line-clamp-2 text-wrap text-base font-bold text-app-dark md:line-clamp-none md:text-3xl">
+				<h3
+					className="links line-clamp-2 text-wrap text-base font-bold text-app-dark md:line-clamp-none md:text-3xl"
+					onClick={() => router.push(`/${post.title}`)}>
 					{post.title}
 				</h3>
 

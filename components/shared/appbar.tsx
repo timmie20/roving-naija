@@ -1,17 +1,6 @@
 import React from "react"
 import { Button } from "../ui/button"
 import Link from "next/link"
-import {
-	NavigationMenu,
-	NavigationMenuContent,
-	NavigationMenuIndicator,
-	NavigationMenuItem,
-	NavigationMenuLink,
-	NavigationMenuList,
-	NavigationMenuTrigger,
-	NavigationMenuViewport,
-	navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu"
 import { Input } from "../ui/input"
 
 const navigation = [

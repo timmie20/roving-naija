@@ -12,12 +12,21 @@ import NewsSectionExtras from "@/components/NewsSectionExtras"
 import NewsSectionContainer from "@/components/NewsSectionContainer"
 import { useQuery } from "@tanstack/react-query"
 import { fetchAllData } from "@/queries/posts"
+import { useRouter } from "next/navigation"
+import {
+	Tooltip,
+	TooltipContent,
+	TooltipProvider,
+	TooltipTrigger,
+} from "@/components/ui/tooltip"
 
 export const Home = () => {
 	const { data, error, isFetching, isError } = useQuery({
 		queryKey: ["allData"],
 		queryFn: fetchAllData,
 	})
+
+	const router = useRouter()
 
 	const { posts, videos } = data || { posts: [], videos: [] }
 
@@ -35,14 +44,27 @@ export const Home = () => {
 
 					<div className="flex flex-col-reverse items-center gap-3 px-3 lg:flex-row xl:px-0">
 						<div className="flex-1 space-y-6">
-							<div className="relative h-[108px] w-full sm:h-[168px]">
-								<Image
-									src="/assets/images/banner.jpg"
-									alt="Martad get to know banner"
-									fill
-									priority
-								/>
-							</div>
+							<TooltipProvider>
+								<Tooltip>
+									<TooltipTrigger asChild>
+										<div
+											className="relative h-[108px] w-full sm:h-[168px]"
+											onClick={() => router.push("/play-game")}>
+											<Image
+												src="/assets/images/word_search_banner.jpg"
+												alt="Martad get to know banner"
+												fill
+												priority
+												className="cursor-pointer transition-all duration-150 hover:scale-105"
+											/>
+										</div>
+									</TooltipTrigger>
+									<TooltipContent>
+										<p>Click to play game</p>
+									</TooltipContent>
+								</Tooltip>
+							</TooltipProvider>
+
 							<div className="grid grid-cols-2 gap-2 px-3 lg:px-0">
 								{posts
 									?.filter((post) => post.priority === 0) // Filter posts with priority === 0
