@@ -2,18 +2,32 @@ import React from "react"
 import { Button } from "../ui/button"
 import Link from "next/link"
 import { Input } from "../ui/input"
+import { TbDeviceGamepad3 } from "react-icons/tb"
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { getCurrentDate } from "@/helpers/getDate"
 
 const navigation = [
 	{ name: "Home", path: "/" },
 	{ name: "News", path: "/topics/news" },
 	{ name: "Politics", path: "/topics/politics" },
 	{ name: "Sports", path: "/topics/sports" },
-	{ name: "Play game", path: "/play-game", icon: "" },
+	{ name: "Play game", path: "/play-game", icon: <TbDeviceGamepad3 size={20} /> },
 	{ name: "Business", path: "/topics/business" },
 	{ name: "Entertaiment", path: "/topics/entertainment" },
 	{ name: "More", path: "/more" },
 	{ name: "Contact us", path: "/contact-us" },
 	{ name: "Adverise with us", path: "/advert" },
+]
+
+const dropdownNav = [
+	{ name: "Subscriptions", path: "/pricing" },
+	{ name: "FAQs", path: "/faqs" },
+	{ name: "Instructions", path: "/instructions" },
 ]
 
 export default function Appbar() {
@@ -23,7 +37,7 @@ export default function Appbar() {
 				<div className="container mx-auto flex items-center justify-between px-3 py-2">
 					<div className="w-[30%]">
 						<span className="text-balance font-Cormorant text-[12px] font-bold leading-none sm:text-sm">
-							Wednesday, November 20th 2024
+							{getCurrentDate()}
 						</span>
 						<div className="mt-3 hidden items-center gap-3 md:flex">
 							<img src="/assets/icons/facebook.svg" alt="Facebook icon" />
@@ -60,70 +74,43 @@ export default function Appbar() {
 
 				<div className="max-h-fit border-[1px] border-primary-light py-7 shadow-lg">
 					<div className="mx-auto flex max-w-screen-xl items-center justify-between gap-4 overflow-x-auto px-6 lg:gap-0 xl:px-0">
-						{navigation.map((navItem) => (
-							<Link key={navItem.name} href={navItem.path} className="links text-nowrap">
-								{navItem.name}
-							</Link>
-						))}
+						{navigation.map((navItem) => {
+							if (navItem.name === "More") {
+								return <MenuDropdown label={navItem.name} key={navItem.name} />
+							} else {
+								return (
+									<Link key={navItem.name} href={navItem.path} className="links text-nowrap">
+										{navItem.name} <span className="inline-flex align-middle">{navItem.icon}</span>
+									</Link>
+								)
+							}
+						})}
 						<div>
 							<Input type="text" placeholder="Search" className="h-10 w-[140px] rounded-full" />
 						</div>
 					</div>
 				</div>
 			</header>
-
-			{/* <div className="max-h-fit border-[1px] border-primary-light bg-white py-7 shadow-lg">
-				<div className="mx-auto flex max-w-screen-xl items-center justify-between gap-4 overflow-x-auto px-6 lg:gap-0">
-					{navigation.map((navItem) => (
-						<Link key={navItem.name} href={navItem.path} className="links text-nowrap">
-							{navItem.name}
-						</Link>
-					))}
-					<div>
-						<Input type="text" placeholder="Search" className="h-10 w-[140px] rounded-full" />
-					</div>
-				</div>
-
-				<NavigationMenu className="flex w-full justify-between text-base">
-					<NavigationMenuList>
-						{navigation.map((navItem) =>
-							navItem.name === "News" ? (
-								<NavigationMenuItem key={navItem.name}>
-									<NavigationMenuTrigger>{navItem.name}</NavigationMenuTrigger>
-									<NavigationMenuContent>
-										<ul className="p-3">
-											<li>
-												<Link href="/">some link</Link>
-											</li>
-											<li>
-												<Link href="/">some link</Link>
-											</li>
-											<li>
-												<Link href="/">some link</Link>
-											</li>
-										</ul>
-									</NavigationMenuContent>
-								</NavigationMenuItem>
-							) : (
-								<NavigationMenuItem key={navItem.name}>
-									<Link href={navItem.path} legacyBehavior passHref>
-										<NavigationMenuLink className={navigationMenuTriggerStyle()}>
-											{navItem.name}
-										</NavigationMenuLink>
-									</Link>
-								</NavigationMenuItem>
-							)
-						)}
-					</NavigationMenuList>
-					<div>
-						<Input
-							type="text"
-							placeholder="Search"
-							className="h-10 max-w-[140px] rounded-full"
-						/>
-					</div>
-				</NavigationMenu>
-			</div> */}
 		</>
+	)
+}
+
+export const MenuDropdown = ({ label }: { label: string }) => {
+	return (
+		<DropdownMenu>
+			<DropdownMenuTrigger asChild>
+				<span className="cursor-pointer">{label}</span>
+			</DropdownMenuTrigger>
+			<DropdownMenuContent>
+				{/* <DropdownMenuLabel>My Account</DropdownMenuLabel> */}
+				{/* <DropdownMenuSeparator /> */}
+
+				{dropdownNav.map((item) => (
+					<DropdownMenuItem key={item.name} asChild>
+						<Link href={item.path}>{item.name}</Link>
+					</DropdownMenuItem>
+				))}
+			</DropdownMenuContent>
+		</DropdownMenu>
 	)
 }
