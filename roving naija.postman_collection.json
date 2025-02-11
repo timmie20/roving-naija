@@ -1,0 +1,571 @@
+{
+	"info": {
+		"_postman_id": "d5b6f9d9-5463-48cd-8ab7-fcc99cbae5e6",
+		"name": "roving naija",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24920767",
+		"_collection_link": "https://galactic-station-876732.postman.co/workspace/jsdjsds~26f446ca-0dae-41ab-a660-a0a1c34d6c6b/collection/24920767-d5b6f9d9-5463-48cd-8ab7-fcc99cbae5e6?action=share&source=collection_link&creator=24920767"
+	},
+	"item": [
+		{
+			"name": "register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "msisdn",
+							"value": "2347047513601",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "gnti53@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "11111111",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "Malcom Dunamis",
+							"type": "text"
+						},
+						{
+							"key": "action",
+							"value": "KVA",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://martadapi.com/rovingnaija/index.php",
+					"protocol": "https",
+					"host": [
+						"martadapi",
+						"com"
+					],
+					"path": [
+						"rovingnaija",
+						"index.php"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "register",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "msisdn",
+									"value": "2347047513601",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "gnti53@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "11111111",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Malcom Dunamis",
+									"type": "text"
+								},
+								{
+									"key": "action",
+									"value": "KVA",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://martadapi.com/spectaplay/index.php",
+							"protocol": "https",
+							"host": [
+								"martadapi",
+								"com"
+							],
+							"path": [
+								"spectaplay",
+								"index.php"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "keep-alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "x-powered-by",
+							"value": "PHP/8.1.29"
+						},
+						{
+							"key": "access-control-allow-origin",
+							"value": "*"
+						},
+						{
+							"key": "access-control-allow-headers",
+							"value": "*"
+						},
+						{
+							"key": "access-control-allow-methods",
+							"value": "POST"
+						},
+						{
+							"key": "content-type",
+							"value": "text/html; charset=UTF-8"
+						},
+						{
+							"key": "content-length",
+							"value": "65"
+						},
+						{
+							"key": "content-encoding",
+							"value": "br"
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "date",
+							"value": "Thu, 24 Oct 2024 06:56:54 GMT"
+						},
+						{
+							"key": "server",
+							"value": "LiteSpeed"
+						},
+						{
+							"key": "x-turbo-charged-by",
+							"value": "LiteSpeed"
+						}
+					],
+					"cookie": [],
+					"body": "{\"status\":200,\"message\":\"User registered and one day trial activated.\"}"
+				}
+			]
+		},
+		{
+			"name": "Check subscription",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "msisdn",
+							"value": "2349049513601",
+							"type": "text"
+						},
+						{
+							"key": "action",
+							"value": "OER",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://martadapi.com/rovingnaija/index.php",
+					"protocol": "https",
+					"host": [
+						"martadapi",
+						"com"
+					],
+					"path": [
+						"rovingnaija",
+						"index.php"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Check subscription",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "msisdn",
+									"value": "2347047513601",
+									"type": "text"
+								},
+								{
+									"key": "action",
+									"value": "OER",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://martadapi.com/spectaplay/index.php",
+							"protocol": "https",
+							"host": [
+								"martadapi",
+								"com"
+							],
+							"path": [
+								"spectaplay",
+								"index.php"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "keep-alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "x-powered-by",
+							"value": "PHP/8.1.29"
+						},
+						{
+							"key": "access-control-allow-origin",
+							"value": "*"
+						},
+						{
+							"key": "access-control-allow-headers",
+							"value": "*"
+						},
+						{
+							"key": "access-control-allow-methods",
+							"value": "POST"
+						},
+						{
+							"key": "content-type",
+							"value": "text/html; charset=UTF-8"
+						},
+						{
+							"key": "content-length",
+							"value": "126"
+						},
+						{
+							"key": "content-encoding",
+							"value": "br"
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "date",
+							"value": "Thu, 24 Oct 2024 06:57:23 GMT"
+						},
+						{
+							"key": "server",
+							"value": "LiteSpeed"
+						},
+						{
+							"key": "x-turbo-charged-by",
+							"value": "LiteSpeed"
+						}
+					],
+					"cookie": [],
+					"body": "{\"status\":200,\"pay_ref\":\"1729753014\",\"message\":\"Subscription valid until 2024-10-25 07:56:54.\",\"plan_id\":\"10D\",\"chargeAmount\":\"0.00\",\"created_at\":\"2024-10-24 07:56:54\"}"
+				}
+			]
+		},
+		{
+			"name": "Check msisdn",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "msisdn",
+							"value": "2349049513601",
+							"type": "text"
+						},
+						{
+							"key": "action",
+							"value": "GRW",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://martadapi.com/rovingnaija/index.php",
+					"protocol": "https",
+					"host": [
+						"martadapi",
+						"com"
+					],
+					"path": [
+						"rovingnaija",
+						"index.php"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Check msisdn",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "msisdn",
+									"value": "2347047513601",
+									"type": "text"
+								},
+								{
+									"key": "action",
+									"value": "GRW",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://martadapi.com/spectaplay/index.php",
+							"protocol": "https",
+							"host": [
+								"martadapi",
+								"com"
+							],
+							"path": [
+								"spectaplay",
+								"index.php"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "keep-alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "x-powered-by",
+							"value": "PHP/8.1.29"
+						},
+						{
+							"key": "access-control-allow-origin",
+							"value": "*"
+						},
+						{
+							"key": "access-control-allow-headers",
+							"value": "*"
+						},
+						{
+							"key": "access-control-allow-methods",
+							"value": "POST"
+						},
+						{
+							"key": "content-type",
+							"value": "text/html; charset=UTF-8"
+						},
+						{
+							"key": "content-length",
+							"value": "97"
+						},
+						{
+							"key": "content-encoding",
+							"value": "br"
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "date",
+							"value": "Thu, 24 Oct 2024 06:57:39 GMT"
+						},
+						{
+							"key": "server",
+							"value": "LiteSpeed"
+						},
+						{
+							"key": "x-turbo-charged-by",
+							"value": "LiteSpeed"
+						}
+					],
+					"cookie": [],
+					"body": "{\"status\":\"success\",\"message\":\"Number belongs to the MTN network!\",\"data\":{\"network\":\"MTN\",\"number\":\"07047513601\"}}"
+				}
+			]
+		},
+		{
+			"name": "Subscribe",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "msisdn",
+							"value": "2349049513601",
+							"type": "text"
+						},
+						{
+							"key": "plan_id",
+							"value": "RNM",
+							"type": "text"
+						},
+						{
+							"key": "channel",
+							"value": "paystack",
+							"type": "text"
+						},
+						{
+							"key": "pay_ref",
+							"value": "z98etfd99",
+							"type": "text"
+						},
+						{
+							"key": "action",
+							"value": "ZIA",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://martadapi.com/rovingnaija/index.php",
+					"protocol": "https",
+					"host": [
+						"martadapi",
+						"com"
+					],
+					"path": [
+						"rovingnaija",
+						"index.php"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Subscribe",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "msisdn",
+									"value": "2347047513601",
+									"type": "text"
+								},
+								{
+									"key": "plan_id",
+									"value": "10M",
+									"type": "text"
+								},
+								{
+									"key": "channel",
+									"value": "paystack",
+									"type": "text"
+								},
+								{
+									"key": "pay_ref",
+									"value": "z98etfd99",
+									"type": "text"
+								},
+								{
+									"key": "action",
+									"value": "ZIA",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://martadapi.com/spectaplay/index.php",
+							"protocol": "https",
+							"host": [
+								"martadapi",
+								"com"
+							],
+							"path": [
+								"spectaplay",
+								"index.php"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "keep-alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "x-powered-by",
+							"value": "PHP/8.1.29"
+						},
+						{
+							"key": "access-control-allow-origin",
+							"value": "*"
+						},
+						{
+							"key": "access-control-allow-headers",
+							"value": "*"
+						},
+						{
+							"key": "access-control-allow-methods",
+							"value": "POST"
+						},
+						{
+							"key": "content-type",
+							"value": "text/html; charset=UTF-8"
+						},
+						{
+							"key": "content-length",
+							"value": "51"
+						},
+						{
+							"key": "content-encoding",
+							"value": "br"
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "date",
+							"value": "Thu, 24 Oct 2024 06:57:53 GMT"
+						},
+						{
+							"key": "server",
+							"value": "LiteSpeed"
+						},
+						{
+							"key": "x-turbo-charged-by",
+							"value": "LiteSpeed"
+						}
+					],
+					"cookie": [],
+					"body": "{\"status\":200,\"message\":\"User subscribed successfully.\"}"
+				}
+			]
+		}
+	]
+}

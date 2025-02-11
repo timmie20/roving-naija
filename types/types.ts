@@ -44,11 +44,10 @@ export type Node = {
 
 export type UserProps = {
 	token: string
-	user: {
-		email: string
-		fullname: string
-		id: string
-		created_at: Date | string
-		update_at: Date | string
-	}
+	msisdn: string
+}
+
+export type SubscriptionObj = {
+	isValid: boolean
+	date: Date | null
 }

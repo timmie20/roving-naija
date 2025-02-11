@@ -13,10 +13,10 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import { Button } from "../ui/button"
-import { FcGoogle } from "react-icons/fc"
-import { register } from "@/queries/auth"
+import { vasRegister } from "@/queries/auth"
 import { toast } from "sonner"
-import { useAuthContext } from "@/context/AuthContext"
+// import { useAuthContext } from "@/context/AuthContext"
+import { useRouter } from "next/navigation"
 // import { HttpError } from "@/types/types"
 
 export default function Register<T>({
@@ -24,13 +24,19 @@ export default function Register<T>({
 }: {
 	setFormType: React.Dispatch<React.SetStateAction<T>>
 }) {
-	const { loginUser } = useAuthContext()
+	// const { loginUser } = useAuthContext()
 	const [loading, setLoading] = useState(false)
+	const router = useRouter()
 
 	const formSchema = z.object({
-		fullname: z.string().min(5, {
+		name: z.string().min(5, {
 			message: "Username must be at least 5 characters.",
 		}),
+
+		msisdn: z.string().min(11, {
+			message: "Phone number must be at leest 11 characters",
+		}),
+
 		email: z.string().email({
 			message: "Invalid email address.",
 		}),
@@ -48,23 +54,25 @@ export default function Register<T>({
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
-			fullname: "",
+			msisdn: "",
 			email: "",
 			password: "",
+			name: "",
 		},
 	})
 
 	const onSubmit = async (values: z.infer<typeof formSchema>) => {
 		setLoading(true)
 		try {
-			const result = await register(values)
-			if (result.message === "User registered successfully") {
-				loginUser(result)
+			const result = await vasRegister({ ...values, action: "KVA" })
+			if (result.status === 200) {
+				router.push("/")
 				toast.success(result.message)
 			}
 			form.reset()
 			console.log(result)
 		} catch (error) {
+			console.log(error)
 			toast.error("Unable to login user", {
 				action: {
 					label: "Undo",
@@ -76,19 +84,38 @@ export default function Register<T>({
 			setLoading(false)
 		}
 	}
+
 	return (
 		<>
 			<Form {...form}>
 				<form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-3">
 					<FormField
 						control={form.control}
-						name="fullname"
+						name="name"
 						render={({ field }) => (
 							<FormItem>
-								<FormLabel>Fullname</FormLabel>
+								<FormLabel>Name</FormLabel>
 								<FormControl>
 									<Input
 										placeholder="John Doe"
+										{...field}
+										className="bg-app-white text-app-dark"
+									/>
+								</FormControl>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
+
+					<FormField
+						control={form.control}
+						name="msisdn"
+						render={({ field }) => (
+							<FormItem>
+								<FormLabel>Phone number</FormLabel>
+								<FormControl>
+									<Input
+										placeholder="09126357897"
 										{...field}
 										className="bg-app-white text-app-dark"
 									/>
@@ -121,11 +148,7 @@ export default function Register<T>({
 							<FormItem>
 								<FormLabel>Password</FormLabel>
 								<FormControl>
-									<Input
-										placeholder="John Doe"
-										{...field}
-										className="bg-app-white text-app-dark"
-									/>
+									<Input placeholder="" {...field} className="bg-app-white text-app-dark" />
 								</FormControl>
 								<FormMessage />
 							</FormItem>
@@ -148,15 +171,6 @@ export default function Register<T>({
 								Log in
 							</span>
 						</p>
-
-						<span>OR</span>
-
-						<Button
-							className="mt-2 inline-flex items-center bg-transparent text-sm font-normal"
-							variant="outline">
-							<FcGoogle size="25" />
-							<span>Sign up with Google</span>
-						</Button>
 					</div>
 				</form>
 			</Form>

@@ -19,6 +19,10 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from "@/components/ui/tooltip"
+import { useAuthContext } from "@/context/AuthContext"
+import { checkSubscription } from "@/queries/auth"
+import { checkValidity } from "@/helpers/extractValidityPeriod"
+import { toast } from "sonner"
 
 export const Home = () => {
 	const { data, error, isFetching, isError } = useQuery({
@@ -26,12 +30,23 @@ export const Home = () => {
 		queryFn: fetchAllData,
 	})
 
+	const { user, setFormType } = useAuthContext()
+
 	const router = useRouter()
 
 	const { posts, videos } = data || { posts: [], videos: [] }
 
 	if (isFetching) return <div>Loading...</div>
 	if (isError) return <div>Error: {error?.message}</div>
+
+	const handleRoute = () => {
+		if (!user) {
+			router.push("/auth/login")
+			setFormType("login")
+		} else {
+			router.push("/play-game")
+		}
+	}
 
 	return (
 		<>
@@ -47,9 +62,7 @@ export const Home = () => {
 							<TooltipProvider>
 								<Tooltip>
 									<TooltipTrigger asChild>
-										<div
-											className="relative h-[108px] w-full sm:h-[168px]"
-											onClick={() => router.push("/play-game")}>
+										<div className="relative h-[108px] w-full sm:h-[168px]" onClick={handleRoute}>
 											<Image
 												src="/assets/images/word_search_banner.jpg"
 												alt="Martad get to know banner"

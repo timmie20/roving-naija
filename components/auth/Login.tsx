@@ -13,9 +13,12 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import { Button } from "../ui/button"
-import { login } from "@/queries/auth"
+import { checkSubscription, login } from "@/queries/auth"
 import { useAuthContext } from "@/context/AuthContext"
 import { toast } from "sonner"
+import { checkValidity } from "@/helpers/extractValidityPeriod"
+import { SubscriptionObj } from "@/types/types"
+import { useRouter } from "next/navigation"
 
 export default function Login<T>({
 	setFormType,
@@ -24,9 +27,12 @@ export default function Login<T>({
 }) {
 	const [loading, setLoading] = useState(false)
 	const { loginUser } = useAuthContext()
+
+	const router = useRouter()
+
 	const formSchema = z.object({
-		// fullname: z.string().min(5, {
-		// 	message: "Username must be at least 5 characters.",
+		// msisdn: z.string().min(11, {
+		// 	message: "Phone number must be at leest 11 characters",
 		// }),
 		email: z.string().email({
 			message: "Invalid email address.",
@@ -45,6 +51,7 @@ export default function Login<T>({
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
+			// msisdn: "",
 			email: "",
 			password: "",
 		},
@@ -53,23 +60,29 @@ export default function Login<T>({
 	const onSubmit = async (values: z.infer<typeof formSchema>) => {
 		setLoading(true)
 		try {
-			const result = await login(values)
-			if (result.message === "Login successful") {
-				loginUser(result)
-				toast.success(result.message)
-				console.log(result)
+			const response = await login(values)
+
+			console.log(response)
+			if (response.message === "Login successful") {
+				router.push("/")
+				toast.success(response.message)
+				const userObj = {
+					token: response.token,
+					msisdn: "09157505111",
+				}
+				loginUser(userObj)
 			}
-			form.reset()
-			console.log(result)
-		} catch (error) {
-			console.log(error)
+
+			console.log(response)
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		} catch (error: any) {
+			console.error(error)
 			toast.error(error.response.data.error, {
-				description: "try creating an account",
+				description: "something must have gone wrong",
 				action: {
 					label: "Undo",
 					onClick: () => console.log("Undo"),
 				},
-				position: "top-right",
 			})
 		} finally {
 			setLoading(false)
@@ -78,7 +91,27 @@ export default function Login<T>({
 	return (
 		<>
 			<Form {...form}>
-				<form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-3">
+				<form
+					onSubmit={form.handleSubmit(onSubmit)}
+					className="flex w-full flex-col space-y-3">
+					<FormField
+						control={form.control}
+						name="msisdn"
+						render={({ field }) => (
+							<FormItem>
+								<FormLabel>Phone Number</FormLabel>
+								<FormControl>
+									<Input
+										placeholder="2349157505223"
+										{...field}
+										className="bg-app-white text-app-dark"
+									/>
+								</FormControl>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
+
 					<FormField
 						control={form.control}
 						name="email"
@@ -86,11 +119,7 @@ export default function Login<T>({
 							<FormItem>
 								<FormLabel>Email</FormLabel>
 								<FormControl>
-									<Input
-										placeholder="John Doe"
-										{...field}
-										className="bg-app-white text-app-dark"
-									/>
+									<Input placeholder="" {...field} className="bg-app-white text-app-dark" />
 								</FormControl>
 								<FormMessage />
 							</FormItem>
@@ -104,22 +133,18 @@ export default function Login<T>({
 							<FormItem>
 								<FormLabel>Password</FormLabel>
 								<FormControl>
-									<Input
-										placeholder="John Doe"
-										{...field}
-										className="bg-app-white text-app-dark"
-									/>
+									<Input placeholder="" {...field} className="bg-app-white text-app-dark" />
 								</FormControl>
 								<FormMessage />
 							</FormItem>
 						)}
 					/>
 
-					<p className="cursor-pointer text-end font-light text-app-white underline-offset-4 hover:underline">
+					{/* <p className="cursor-pointer text-end font-light text-app-white underline-offset-4 hover:underline">
 						Forget Password?
-					</p>
+					</p> */}
 
-					<div className="flex flex-col items-center justify-center space-y-5 pt-6 text-app-white">
+					<div className="mt-auto flex flex-col items-center justify-center space-y-5 pt-6 text-app-white">
 						<Button
 							variant="outline"
 							size="lg"

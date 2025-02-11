@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from "react"
+import React from "react"
 import styles from "@/components/auth/auth.module.css"
 import Image from "next/image"
 import logo from "@/public/assets/images/roving-naija-logo.svg"
@@ -7,11 +7,10 @@ import { Button } from "@/components/ui/button"
 import Register from "@/components/auth/Register"
 import Login from "@/components/auth/Login"
 import Link from "next/link"
-
-type FormType = "register" | "login" | string
+import { useAuthContext } from "@/context/AuthContext"
 
 export default function Page() {
-	const [formType, setFormType] = useState<FormType>("register")
+	const { formType, setFormType } = useAuthContext()
 
 	function toggleFormType(e: React.MouseEvent<HTMLButtonElement>) {
 		if (e.target && e.target instanceof HTMLElement) {
@@ -24,7 +23,7 @@ export default function Page() {
 			<div
 				className={`${styles.auth_bg} flex h-screen w-screen items-center justify-end lg:px-2`}>
 				<div
-					className={`${styles.glass_morph_effect} flex h-full w-full rounded-lg px-2 py-3 lg:max-h-[808px] lg:max-w-[651px] lg:border lg:border-app-white`}>
+					className={`${styles.glass_morph_effect} flex h-full w-full rounded-none px-2 py-3 lg:max-w-[651px] lg:border lg:border-app-white xl:max-h-[90vh] xl:rounded-lg`}>
 					<div className="mx-auto flex w-full max-w-md flex-col items-center">
 						<Link href="/">
 							<Image src={logo} alt="Roving naija logo" priority />

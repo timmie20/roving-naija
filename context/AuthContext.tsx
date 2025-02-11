@@ -5,13 +5,19 @@ import React from "react"
 
 import { UserProps } from "@/types/types"
 
+type FormType = string
+
 interface AuthContextProps {
 	user: UserProps | null // User object or null when not logged in
+	formType: FormType
+	setFormType: React.Dispatch<React.SetStateAction<FormType>>
 	loginUser: (user: UserProps) => void
 }
 
 const defaultContext: AuthContextProps = {
 	user: null,
+	formType: "register",
+	setFormType: () => {},
 	loginUser: async () => {},
 }
 
@@ -21,19 +27,25 @@ export const AuthContext = React.createContext<AuthContextProps>(defaultContext)
 // AuthContextProvider component
 export const AuthContextProvider = ({ children }: React.PropsWithChildren & {}) => {
 	const [user, setUser] = React.useState<UserProps | null>(null)
+	const [formType, setFormType] = React.useState<FormType>("register")
 
 	const loginUser = (user: UserProps) => {
+		// 08088722900
+
 		const token = user.token
 		if (!token) throw new Error("Token not found.")
-		Cookies.set("ROVING-NAIJA-TOKEN", token, { expires: 7, sameSite: "Strict" })
-		localStorage.setItem("user", JSON.stringify({ user: user.user, token: user.token }))
+		Cookies.set("ROVING-NAIJA", JSON.stringify({ msisdn: "09157505111", token: token }), {
+			expires: 5,
+			sameSite: "Strict",
+		})
+		// localStorage.setItem("user-token", JSON.stringify({ token: token }))
 		setUser(user)
 		return user
 	}
 
 	// Load user or admin from localStorage on mount
 	React.useEffect(() => {
-		const savedUser = localStorage.getItem("user")
+		const savedUser = Cookies.get("user-token")
 
 		if (savedUser) {
 			setUser(JSON.parse(savedUser)) // Set user state
@@ -42,7 +54,9 @@ export const AuthContextProvider = ({ children }: React.PropsWithChildren & {}) 
 
 	// Provide the context
 	return (
-		<AuthContext.Provider value={{ user, loginUser }}>{children}</AuthContext.Provider>
+		<AuthContext.Provider value={{ user, loginUser, formType, setFormType }}>
+			{children}
+		</AuthContext.Provider>
 	)
 }
 
