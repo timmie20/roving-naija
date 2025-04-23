@@ -1,21 +1,26 @@
 import React from "react"
 import Image from "next/image"
+import { Post } from "@/types/types"
+import { timeAgo } from "@/helpers/TimeFormater"
+import { Title } from "./shared/Title"
 
-export default function NewsCardLg() {
+export default function NewsCardLg({ post }: { post: Post }) {
 	return (
 		<div>
 			<div className="relative h-[200px] w-full lg:h-[360px]">
 				<Image
-					src="/assets/images/frame4.png"
-					alt="Latest news image"
+					src={post.image[0]}
+					alt={`image of ${post.title}`}
 					fill
 					priority
-					sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+					className="object-cover"
 				/>
 			</div>
 			<div className="flex h-[86px] flex-col justify-between border border-[#959595] p-4 lg:h-[132px]">
 				<h3 className="links line-clamp-2 text-base font-bold text-app-dark md:line-clamp-none md:text-3xl">
-					Malcolm Wins Edo state Governorship election.{" "}
+					<Title slug={post.id} size="lg">
+						{post.title}
+					</Title>
 				</h3>
 				<div className="flex items-center justify-between">
 					<aside className="flex items-center gap-3">
@@ -23,9 +28,9 @@ export default function NewsCardLg() {
 							<small className="text-[8px] sm:text-xs">By Mark Obidiegwu</small>
 						</i>
 						<span className="flex items-center gap-1">
-							<img src="/assets/icons/clock.svg" alt="Clock icon" />
+							{/* <img src="/assets/icons/clock.svg" alt="Clock icon" /> */}
 							<i>
-								<small className="text-[8px] sm:text-xs">20 November 2024 .</small>
+								<small className="text-[8px] sm:text-xs">{timeAgo(post.created_at)}</small>
 							</i>
 						</span>
 					</aside>

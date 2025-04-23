@@ -13,23 +13,25 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import { Button } from "../ui/button"
-import { vasRegister } from "@/queries/auth"
+import { vasRegister, backendRegister } from "@/queries/auth"
 import { toast } from "sonner"
-// import { useAuthContext } from "@/context/AuthContext"
+import { useAuthContext } from "@/context/AuthContext"
 import { useRouter } from "next/navigation"
 // import { HttpError } from "@/types/types"
 
 export default function Register<T>({
 	setFormType,
+	setRedirecting,
 }: {
 	setFormType: React.Dispatch<React.SetStateAction<T>>
+	setRedirecting: React.Dispatch<React.SetStateAction<boolean>>
 }) {
-	// const { loginUser } = useAuthContext()
+	const { loginUser } = useAuthContext()
 	const [loading, setLoading] = useState(false)
 	const router = useRouter()
 
 	const formSchema = z.object({
-		name: z.string().min(5, {
+		fullname: z.string().min(5, {
 			message: "Username must be at least 5 characters.",
 		}),
 
@@ -57,29 +59,53 @@ export default function Register<T>({
 			msisdn: "",
 			email: "",
 			password: "",
-			name: "",
+			fullname: "",
 		},
 	})
 
 	const onSubmit = async (values: z.infer<typeof formSchema>) => {
 		setLoading(true)
+
 		try {
-			const result = await vasRegister({ ...values, action: "KVA" })
-			if (result.status === 200) {
-				router.push("/")
-				toast.success(result.message)
+			// First API call: Register on backend
+			const backendResult = await backendRegister(values)
+			console.log("Backend Result:", backendResult)
+
+			const isBackendSuccess = backendResult?.success
+
+			if (!isBackendSuccess) {
+				toast.error(backendResult?.data?.message || "User registration failed")
+				return
 			}
-			form.reset()
-			console.log(result)
-		} catch (error) {
-			console.log(error)
-			toast.error("Unable to login user", {
-				action: {
-					label: "Undo",
-					onClick: () => console.log("Undo"),
-				},
-				position: "top-right",
+			const user = {
+				msisdn: backendResult?.data.user?.msisdn,
+				token: backendResult?.data?.token,
+			}
+			loginUser(user)
+
+			toast.success(backendResult.data?.message)
+
+			// Second API call: VAS registration
+			console.log("Proceeding to call vasRegister...")
+
+			const vasResult = await vasRegister({
+				...values,
+				name: values.fullname,
+				action: "KVA",
 			})
+
+			console.log("VAS Result:", vasResult)
+
+			if (vasResult?.success && vasResult.data?.status === 200) {
+				setRedirecting(true)
+				router.push("/")
+				toast.success(vasResult.data?.message)
+			} else {
+				toast.error(vasResult?.data?.message || "VAS registration failed")
+			}
+		} catch (error) {
+			console.error("Registration error:", error)
+			toast.error("An unexpected error occurred")
 		} finally {
 			setLoading(false)
 		}
@@ -91,7 +117,7 @@ export default function Register<T>({
 				<form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-3">
 					<FormField
 						control={form.control}
-						name="name"
+						name="fullname"
 						render={({ field }) => (
 							<FormItem>
 								<FormLabel>Name</FormLabel>
@@ -132,7 +158,7 @@ export default function Register<T>({
 								<FormLabel>Email</FormLabel>
 								<FormControl>
 									<Input
-										placeholder="John Doe"
+										placeholder="example@email.com"
 										{...field}
 										className="bg-app-white text-app-dark"
 									/>

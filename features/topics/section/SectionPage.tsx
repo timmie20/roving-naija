@@ -1,22 +1,18 @@
 "use client"
-import React, { useRef, useEffect } from "react"
+import MainLayout from "@/components/app/MainLayout"
+import Client from "./Client"
 import { useParams, useRouter } from "next/navigation"
-import { useQuery } from "@tanstack/react-query"
-import { getPost } from "@/queries/posts"
-import { NewsArticle } from "@/features/view-specific"
+import { usePosts } from "@/hooks/usePosts"
+import { useEffect, useRef } from "react"
 import { useSubscribed } from "@/hooks/useCheckSubscription"
 import SubscribeDialog from "@/components/SubscribeDialog"
 import Spinner from "@/components/shared/spinner"
 
-export default function Page() {
-	const { slug } = useParams()
+export const SectionPage = () => {
+	const params = useParams()
+	const slug = typeof params.slug === "string" ? params.slug : ""
 
-	const { data, isLoading, isError, error } = useQuery({
-		queryKey: ["post", slug],
-		queryFn: () => getPost(Number(slug)),
-		enabled: !!slug,
-	})
-
+	const { data, isFetching } = usePosts(slug)
 	const { isValid } = useSubscribed()
 	const dialogRef = useRef<HTMLDialogElement>(null)
 	const router = useRouter()
@@ -32,11 +28,21 @@ export default function Page() {
 		}
 	}, [isValid, router])
 
-	if (isLoading) return <Spinner />
-	if (isError) return <p>Error: {(error as Error).message}</p>
+	// Avoid conditional rendering before hooks
+	if (isFetching) return <Spinner />
+
+	const posts = data && "data" in data ? data.data : []
+	if (!posts.length) return <div>No posts found.</div>
 
 	if (isValid === false) {
 		return <SubscribeDialog dialogRef={dialogRef} />
 	}
-	return <NewsArticle post={data?.data} />
+
+	return (
+		<MainLayout>
+			<div className="mx-auto max-w-screen-xl">
+				<Client posts={posts} />
+			</div>
+		</MainLayout>
+	)
 }

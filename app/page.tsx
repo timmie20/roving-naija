@@ -6,6 +6,7 @@ import { Home } from "@/features/home"
 export default async function page() {
 	const queryClient = new QueryClient()
 	await queryClient.prefetchQuery({ queryKey: ["allData"], queryFn: fetchAllData })
+
 	return (
 		<>
 			<HydrationBoundary state={dehydrate(queryClient)}>

@@ -1,43 +1,50 @@
 "use client"
 import MainLayout from "@/components/app/MainLayout"
+import { Post } from "@/types/types"
+import Image from "next/image"
+import { format } from "date-fns"
 
-const data = {
-	title: "Breaking News: Major Event",
-	content:
-		"In a stunning turn of events, major changes have occurred that are set to impact the global landscape significantly. Analysts are scrambling to make sense of the sudden developments...\n\nExperts suggest that this could lead to massive shifts in policy and economicstrategies worldwide. As the situation unfolds, more details are expected to emerge....\n\nMore updates coming in as we gather information.",
-	images: ["https://placehold.co/600x300", "https://placehold.co/600x300"],
-}
+// const data = {
+// 	title: "Breaking News: Major Event",
+// 	content:
+// 		"In a stunning turn of events, major changes have occurred that are set to impact the global landscape significantly. Analysts are scrambling to make sense of the sudden developments...\n\nExperts suggest that this could lead to massive shifts in policy and economicstrategies worldwide. As the situation unfolds, more details are expected to emerge....\n\nMore updates coming in as we gather information.",
+// 	images: ["https://placehold.co/600x300", "https://placehold.co/600x300"],
+// }
 
-export const NewsArticle = () => {
-	const paragraphs = data.content.split("\n\n") // Split paragraphs
-
-	const { images } = data
+export const NewsArticle = ({ post }: { post: Post | undefined }) => {
+	const paragraphs = post?.content?.split("\r\n\r\n") // Split paragraphs
 
 	return (
 		<MainLayout>
 			<main className="mx-auto mt-6 flex max-w-screen-xl flex-col lg:flex-row">
 				<article className="lg:w-2/3 lg:pr-8">
-					<h2 className="mb-2 text-3xl font-bold">
-						Breaking News: Major Event Shakes the World
-					</h2>
-					<p className="mb-4 text-gray-600">By Jane Smith on October 15, 2023</p>
+					<h2 className="mb-2 text-3xl font-bold">{post?.title}</h2>
+					<p className="mb-4 text-gray-600">
+						Roving 9ja ,{" "}
+						{post?.created_at ? format(post.created_at, "do MMMM yyyy") : "Unknown date"}
+					</p>
 
-					{paragraphs.map((para, index) => (
+					{paragraphs?.map((paragraph, index) => (
 						<div key={index}>
-							<p className="my-4 text-base/relaxed font-normal">{para}</p>
+							<p className="my-4 text-base/relaxed font-normal">{paragraph}</p>
 
 							{/* Insert images between paragraphs, ensuring all images are used */}
-							{images[index] && (
-								<img
-									src={images[index]}
-									alt="Related News"
-									style={{ width: "100%", borderRadius: "8px" }}
-								/>
+							{post?.image[index] && (
+								<div className="relative h-[200px] w-full shrink-0 rounded-lg md:h-[400px]">
+									<Image
+										src={post.image[index]}
+										alt="Related News"
+										style={{ width: "100%" }}
+										priority
+										fill
+										className="object-cover"
+									/>
+								</div>
 							)}
 						</div>
 					))}
 
-					<div className="mb-4 flex space-x-2">
+					<div className="my-4 flex space-x-2">
 						<button className="rounded bg-green-600 px-4 py-2 text-white">
 							Share on Facebook
 						</button>
@@ -77,7 +84,7 @@ export const NewsArticle = () => {
 				</article>
 				<aside className="mt-6 lg:mt-0 lg:w-1/3">
 					<section className="mb-6">
-						<h3 className="mb-2 text-xl font-bold">Related Articles</h3>
+						<h3 className="mb-2 text-xl font-bold">Related Category</h3>
 						<ul>
 							<li className="mb-2">
 								<a href="#" className="text-blue-600 hover:underline">

@@ -50,7 +50,7 @@ export default function page() {
 								<button
 									type="submit"
 									className="w-full rounded-lg bg-secondary-darker p-3 text-white shadow-sm">
-									Submit Form
+									Submit
 								</button>
 							</form>
 						</div>

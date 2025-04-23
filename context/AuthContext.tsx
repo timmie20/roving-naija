@@ -1,9 +1,14 @@
 "use client"
-
 import Cookies from "js-cookie"
 import React from "react"
-
 import { UserProps } from "@/types/types"
+import {
+	useGetCookies,
+	useSetCookie,
+	useHasCookie,
+	useDeleteCookie,
+	useGetCookie,
+} from "cookies-next"
 
 type FormType = string
 
@@ -29,23 +34,24 @@ export const AuthContextProvider = ({ children }: React.PropsWithChildren & {}) 
 	const [user, setUser] = React.useState<UserProps | null>(null)
 	const [formType, setFormType] = React.useState<FormType>("register")
 
-	const loginUser = (user: UserProps) => {
-		// 08088722900
+	const setCookie = useSetCookie()
 
+	const loginUser = (user: UserProps) => {
 		const token = user.token
 		if (!token) throw new Error("Token not found.")
-		Cookies.set("ROVING-NAIJA", JSON.stringify({ msisdn: "09157505111", token: token }), {
-			expires: 5,
-			sameSite: "Strict",
+		setCookie("user-data", JSON.stringify(user), {
+			maxAge: 7 * 24 * 60 * 60,
+			sameSite: "strict",
+			path: "/",
 		})
 		// localStorage.setItem("user-token", JSON.stringify({ token: token }))
 		setUser(user)
 		return user
 	}
 
-	// Load user or admin from localStorage on mount
+	// Load user from cookie on mount
 	React.useEffect(() => {
-		const savedUser = Cookies.get("user-token")
+		const savedUser = Cookies.get("user-data")
 
 		if (savedUser) {
 			setUser(JSON.parse(savedUser)) // Set user state

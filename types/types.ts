@@ -14,14 +14,14 @@ export interface NewsDataInterface {
 	latest: LatestNews[]
 }
 
-export type HttpResponse<T> = {
+export type ApiResponse<T> = {
 	code: number
 	message: string
 	status: string
 	data: T
 }
 
-export type HttpError = {
+export type ApiError = {
 	response: {
 		data: {
 			code: number
@@ -50,4 +50,41 @@ export type UserProps = {
 export type SubscriptionObj = {
 	isValid: boolean
 	date: Date | null
+}
+
+export interface Post {
+	id: number
+	title: string
+	content: string
+	category_id: number
+	category_name: string
+	image: string[]
+	created_at: string
+	updated_at: string
+	priority: number
+}
+
+export interface Posts {
+	data: Post[] | []
+}
+
+export interface Video extends Omit<Post, "priority" | "image" | "content"> {
+	description: string
+	video_link: string
+	is_priority: number
+}
+
+export interface Videos {
+	data: Video[] | []
+}
+
+export interface Category {
+	id: number
+	name: string
+	description: string
+	priority: number
+}
+
+export interface Categories {
+	data: Category[] | []
 }

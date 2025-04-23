@@ -1,8 +1,8 @@
 "use client"
-import { useRouter } from "next/navigation"
+// import { useRouter } from "next/navigation"
 
 export default function SlugPage() {
-	const router = useRouter()
+	// const router = useRouter()
 	// const { slug } = router.query
 
 	return (

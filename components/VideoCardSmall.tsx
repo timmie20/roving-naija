@@ -13,12 +13,12 @@ export default function VideoCardSmall() {
 				/>
 				<div className="absolute inset-0 bg-black opacity-50"></div>
 
-				<img
+				{/* <img
 					src="/assets/icons/video-icon.svg"
 					alt="video icon"
 					className="absolute h-10 w-10"
 					style={{ top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}
-				/>
+				/> */}
 			</div>
 
 			<div className="flex flex-col justify-between">

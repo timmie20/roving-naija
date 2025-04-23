@@ -1,33 +1,29 @@
 "use client"
-import { checkValidity } from "@/helpers/extractValidityPeriod"
-import { checkSubscription } from "@/queries/auth"
+import SubscribeDialog from "@/components/SubscribeDialog"
+import { useSubscribed } from "@/hooks/useCheckSubscription"
 import { useRouter } from "next/navigation"
-import React, { useLayoutEffect } from "react"
-import { toast } from "sonner"
+import React, { useEffect, useRef } from "react"
+
 export const GamePage = () => {
 	const router = useRouter()
 
-	const handleCheck = async () => {
-		try {
-			const response = await checkSubscription()
-			if (response) {
-				const data = checkValidity(response.data.message)
-				if (data?.isValid) {
-					router.push("/play-game")
-				} else {
-					router.push("/pricing")
-					toast.error("subscription expired", {
-						description: "Seems like you don't have an active subscription to play games",
-					})
-				}
-			}
-		} catch (error) {
-			console.error(error)
+	const { isValid } = useSubscribed()
+	const dialogRef = useRef<HTMLDialogElement>(null)
+
+	useEffect(() => {
+		if (isValid === false && dialogRef.current) {
+			dialogRef.current.showModal()
+
+			setTimeout(() => {
+				dialogRef.current?.close()
+				router.push("/pricing")
+			}, 2500)
 		}
+	}, [isValid, router])
+
+	if (isValid === false) {
+		return <SubscribeDialog dialogRef={dialogRef} />
 	}
-	useLayoutEffect(() => {
-		handleCheck()
-	}, [])
 
 	return (
 		<div style={{ width: "100vw", height: "100vh" }} className="mx-auto">

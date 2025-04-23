@@ -1,23 +1,27 @@
 import React from "react"
+import { Post } from "@/types/types"
+import Image from "next/image"
+import { Title } from "./shared/Title"
+import { format } from "date-fns"
 
-export default function NewsCardMedium() {
+export default function NewsCardMedium({ post }: { post: Post }) {
 	return (
 		<div className="flex-1 overflow-hidden bg-white shadow-md">
-			<img
-				src="https://placehold.co/600x400"
-				alt="Portrait of a woman smiling"
-				className="w-full"
-			/>
+			<div className="relative h-[200px] w-full">
+				<Image
+					src={post.image[0]}
+					alt="Portrait of a woman smiling"
+					className="object-cover"
+					fill
+					priority
+				/>
+			</div>
 			<div className="p-4">
-				<h2 className="links mb-2 text-pretty font-Poppins text-lg font-medium">
-					Lagos state governor’s wife seen jumping danfo.
-				</h2>
-				<p className="mb-4 text-gray-700">
-					Lagos state governor’s wife seen jumping danfo after being called out for...
-				</p>
+				<Title slug={post.id}>{post.title}</Title>
+				<p className="mb-4 line-clamp-3 text-[14px] text-gray-700">{post.content}</p>
 				<div className="flex items-center text-sm text-gray-500">
 					<i className="far fa-clock mr-2"></i>
-					<span>20 November 2024.</span>
+					<span> {format(post.created_at, "do MMMM yyyy")}</span>
 				</div>
 			</div>
 		</div>

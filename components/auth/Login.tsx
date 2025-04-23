@@ -13,16 +13,16 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import { Button } from "../ui/button"
-import { checkSubscription, login } from "@/queries/auth"
+import { backendLogin } from "@/queries/auth"
 import { useAuthContext } from "@/context/AuthContext"
 import { toast } from "sonner"
-import { checkValidity } from "@/helpers/extractValidityPeriod"
-import { SubscriptionObj } from "@/types/types"
 import { useRouter } from "next/navigation"
 
 export default function Login<T>({
+	setRedirecting,
 	setFormType,
 }: {
+	setRedirecting: React.Dispatch<React.SetStateAction<boolean>>
 	setFormType: React.Dispatch<React.SetStateAction<T>>
 }) {
 	const [loading, setLoading] = useState(false)
@@ -31,11 +31,8 @@ export default function Login<T>({
 	const router = useRouter()
 
 	const formSchema = z.object({
-		// msisdn: z.string().min(11, {
-		// 	message: "Phone number must be at leest 11 characters",
-		// }),
-		email: z.string().email({
-			message: "Invalid email address.",
+		msisdn: z.string().min(11, {
+			message: "Phone number must be at leest 11 characters",
 		}),
 		password: z
 			.string()
@@ -51,8 +48,7 @@ export default function Login<T>({
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
-			// msisdn: "",
-			email: "",
+			msisdn: "",
 			password: "",
 		},
 	})
@@ -60,20 +56,23 @@ export default function Login<T>({
 	const onSubmit = async (values: z.infer<typeof formSchema>) => {
 		setLoading(true)
 		try {
-			const response = await login(values)
+			const response = await backendLogin(values)
 
-			console.log(response)
-			if (response.message === "Login successful") {
-				router.push("/")
-				toast.success(response.message)
-				const userObj = {
-					token: response.token,
-					msisdn: "09157505111",
+			const isLoginSuccess = response?.success
+
+			if (!isLoginSuccess) {
+				toast.error(response?.data?.message || "User login failed")
+				return
+			} else {
+				const user = {
+					msisdn: response?.data.user?.msisdn,
+					token: response?.data?.token,
 				}
-				loginUser(userObj)
+				loginUser(user)
+				setRedirecting(true)
+				router.push("/")
+				toast.success(response.data.message)
 			}
-
-			console.log(response)
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		} catch (error: any) {
 			console.error(error)
@@ -106,20 +105,6 @@ export default function Login<T>({
 										{...field}
 										className="bg-app-white text-app-dark"
 									/>
-								</FormControl>
-								<FormMessage />
-							</FormItem>
-						)}
-					/>
-
-					<FormField
-						control={form.control}
-						name="email"
-						render={({ field }) => (
-							<FormItem>
-								<FormLabel>Email</FormLabel>
-								<FormControl>
-									<Input placeholder="" {...field} className="bg-app-white text-app-dark" />
 								</FormControl>
 								<FormMessage />
 							</FormItem>

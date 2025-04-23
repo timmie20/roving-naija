@@ -1,5 +1,5 @@
 "use client"
-import React from "react"
+import React, { useState } from "react"
 import styles from "@/components/auth/auth.module.css"
 import Image from "next/image"
 import logo from "@/public/assets/images/roving-naija-logo.svg"
@@ -12,6 +12,8 @@ import { useAuthContext } from "@/context/AuthContext"
 export default function Page() {
 	const { formType, setFormType } = useAuthContext()
 
+	const [redirecting, setRedirecting] = useState(false)
+
 	function toggleFormType(e: React.MouseEvent<HTMLButtonElement>) {
 		if (e.target && e.target instanceof HTMLElement) {
 			const text: string = e.target.innerText.toLowerCase()
@@ -20,6 +22,12 @@ export default function Page() {
 	}
 	return (
 		<>
+			{redirecting && (
+				<div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/60 backdrop-blur-sm">
+					<div className="h-10 w-10 animate-spin rounded-full border-4 border-white border-t-transparent" />
+					<p className="mt-4 text-lg font-medium text-white">Redirecting to our homepage...</p>
+				</div>
+			)}
 			<div
 				className={`${styles.auth_bg} flex h-screen w-screen items-center justify-end lg:px-2`}>
 				<div
@@ -31,7 +39,7 @@ export default function Page() {
 
 						<div className="mt-4 flex w-full flex-col justify-between gap-4 min-[375px]:flex-row">
 							<Button
-								variant="custom"
+								variant="ghost"
 								size="lg"
 								onClick={(e) => toggleFormType(e)}
 								className="w-full"
@@ -43,7 +51,7 @@ export default function Page() {
 								REGISTER
 							</Button>
 							<Button
-								variant="custom"
+								variant="ghost"
 								onClick={(e) => toggleFormType(e)}
 								size="lg"
 								className="w-full"
@@ -64,9 +72,9 @@ export default function Page() {
 
 						<div className="mt-4 w-full">
 							{formType === "register" ? (
-								<Register setFormType={setFormType} />
+								<Register setFormType={setFormType} setRedirecting={setRedirecting} />
 							) : (
-								<Login setFormType={setFormType} />
+								<Login setFormType={setFormType} setRedirecting={setRedirecting} />
 							)}
 						</div>
 					</div>

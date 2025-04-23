@@ -1,7 +1,6 @@
 import React from "react"
-import { Button } from "../ui/button"
 import Link from "next/link"
-import { Input } from "../ui/input"
+import Image from "next/image"
 import { TbDeviceGamepad3 } from "react-icons/tb"
 import {
 	DropdownMenu,
@@ -13,7 +12,7 @@ import { getCurrentDate } from "@/helpers/getDate"
 
 const navigation = [
 	{ name: "Home", path: "/" },
-	{ name: "News", path: "/topics/news" },
+	{ name: "Featured", path: "/topics/featured" },
 	{ name: "Politics", path: "/topics/politics" },
 	{ name: "Sports", path: "/topics/sports" },
 	{ name: "Play game", path: "/play-game", icon: <TbDeviceGamepad3 size={20} /> },
@@ -39,25 +38,49 @@ export default function Appbar() {
 						<span className="text-balance font-Cormorant text-[12px] font-bold leading-none sm:text-sm">
 							{getCurrentDate()}
 						</span>
-						<div className="mt-3 hidden items-center gap-3 md:flex">
-							<img src="/assets/icons/facebook.svg" alt="Facebook icon" />
-							<img src="/assets/icons/instagram.svg" alt="Instagram icon" />
-							<img src="/assets/icons/linkedin.svg" alt="Linkedin icon" />
-							<img src="/assets/icons/tiktok.svg" alt="Tiktok icon" />
-							<img src="/assets/icons/whatsapp.svg" alt="whatsapp icon" />
-							<img src="/assets/icons/x_logo.svg" alt="X icon" />
-							<img src="/assets/icons/youtube.svg" alt="Youtube icon" />
-						</div>
 					</div>
 					<Link href="/">
-						<img
+						<Image
 							src="/assets/images/roving-naija-logo.svg"
 							alt="Roving naija logo"
 							className="w-full shrink-0"
+							priority
+							width={100}
+							height={100}
 						/>
 					</Link>
 
-					<div className="flex w-fit flex-col gap-2 font-Cormorant lg:flex-row">
+					<div className="mt-3 hidden items-center gap-3 md:flex">
+						<Image
+							src="/assets/icons/facebook.svg"
+							alt="Facebook icon"
+							width={24}
+							height={24}
+						/>
+						<Image
+							src="/assets/icons/instagram.svg"
+							alt="Instagram icon"
+							width={24}
+							height={24}
+						/>
+						<Image
+							src="/assets/icons/linkedin.svg"
+							alt="LinkedIn icon"
+							width={24}
+							height={24}
+						/>
+						<Image src="/assets/icons/tiktok.svg" alt="Tiktok icon" width={24} height={24} />
+						<Image
+							src="/assets/icons/whatsapp.svg"
+							alt="Whatsapp icon"
+							width={24}
+							height={24}
+						/>
+						<Image src="/assets/icons/x_logo.svg" alt="X icon" width={24} height={24} />
+						<Image src="/assets/icons/youtube.svg" alt="YouTube icon" width={24} height={24} />
+					</div>
+
+					{/* <div className="flex w-fit flex-col gap-2 font-Cormorant lg:flex-row">
 						<Link href="/auth/login">
 							<Button className="h-fit w-[80px] rounded-sm bg-app-dark font-Cormorant text-[10px] text-white sm:w-[165px] sm:text-base lg:mr-3">
 								REGISTER
@@ -69,7 +92,7 @@ export default function Appbar() {
 							className="h-fit w-[80px] rounded-sm font-Cormorant text-[10px] sm:w-[165px] sm:text-base">
 							LOGIN
 						</Button>
-					</div>
+					</div> */}
 				</div>
 
 				<div className="max-h-fit border-[1px] border-primary-light py-7 shadow-lg">
@@ -85,9 +108,9 @@ export default function Appbar() {
 								)
 							}
 						})}
-						<div>
+						{/* <div>
 							<Input type="text" placeholder="Search" className="h-10 w-[140px] rounded-full" />
-						</div>
+						</div> */}
 					</div>
 				</div>
 			</header>

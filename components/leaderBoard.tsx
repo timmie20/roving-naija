@@ -1,5 +1,4 @@
 import React from "react"
-import { ScrollArea } from "./ui/scroll-area"
 
 export default function leaderBoard() {
 	const data = [
@@ -19,7 +18,7 @@ export default function leaderBoard() {
 		<div className="w-full flex-none px-3 lg:max-w-[370px]">
 			<div className="relative inline-flex items-center gap-2 pb-4">
 				<span className="font-base font-Poppins font-medium">Leader Board</span>
-				<img src="/assets/icons/leaderboard.svg" />
+				{/* <img src="/assets/icons/leaderboard.svg" /> */}
 			</div>
 
 			<div className="relative h-full max-h-[500px] w-full overflow-y-auto border-[1px] border-neutral-200 pb-8">

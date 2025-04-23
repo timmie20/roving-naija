@@ -1,60 +1,72 @@
 "use client"
+import { useRef, useEffect } from "react"
 import MainLayout from "@/components/app/MainLayout"
-import LatestNews from "@/components/latestNews"
 import Trending from "@/components/trending"
-import LeaderBoard from "@/components/leaderBoard"
+// import LeaderBoard from "@/components/leaderBoard"
 import Image from "next/image"
-import { NewsCardBase } from "@/components/NewsCardBase"
+// import { NewsCardBase } from "@/components/NewsCardBase"
 import TopVideos from "@/components/topVideos"
 import Ads from "@/components/Ads"
 import NewsCardSmall from "@/components/NewsCardSmall"
 import NewsSectionExtras from "@/components/NewsSectionExtras"
 import NewsSectionContainer from "@/components/NewsSectionContainer"
-import { useQuery } from "@tanstack/react-query"
-import { fetchAllData } from "@/queries/posts"
-import { useRouter } from "next/navigation"
 import {
 	Tooltip,
 	TooltipContent,
 	TooltipProvider,
 	TooltipTrigger,
 } from "@/components/ui/tooltip"
-import { useAuthContext } from "@/context/AuthContext"
-import { checkSubscription } from "@/queries/auth"
-import { checkValidity } from "@/helpers/extractValidityPeriod"
-import { toast } from "sonner"
+import { useCategorizedData } from "@/hooks/useCategorizedData"
+import { CarouselApiDemo } from "@/components/scroller"
+import LatestNews from "@/components/LatestNews"
+import { useSubscribed } from "@/hooks/useCheckSubscription"
+import { useRouter } from "next/navigation"
+import SubscribeDialog from "@/components/SubscribeDialog"
+import Spinner from "@/components/shared/spinner"
 
 export const Home = () => {
-	const { data, error, isFetching, isError } = useQuery({
-		queryKey: ["allData"],
-		queryFn: fetchAllData,
-	})
-
-	const { user, setFormType } = useAuthContext()
+	const {
+		isLoading,
+		isError,
+		prioritized,
+		nonPrioritized,
+		postsByCategory,
+		gossip,
+		regulars,
+		prioritizedPost,
+		videos,
+		error,
+	} = useCategorizedData()
 
 	const router = useRouter()
 
-	const { posts, videos } = data || { posts: [], videos: [] }
+	const { isValid } = useSubscribed()
+	const dialogRef = useRef<HTMLDialogElement>(null)
 
-	if (isFetching) return <div>Loading...</div>
-	if (isError) return <div>Error: {error?.message}</div>
+	useEffect(() => {
+		if (isValid === false && dialogRef.current) {
+			dialogRef.current.showModal()
 
-	const handleRoute = () => {
-		if (!user) {
-			router.push("/auth/login")
-			setFormType("login")
-		} else {
-			router.push("/play-game")
+			setTimeout(() => {
+				dialogRef.current?.close()
+				router.push("/pricing")
+			}, 2500)
 		}
-	}
+	}, [isValid, router])
 
+	if (isLoading) return <Spinner />
+	if (isError) return <p>Error: {(error as Error).message}</p>
+
+	if (isValid === false) {
+		return <SubscribeDialog dialogRef={dialogRef} />
+	}
 	return (
 		<>
 			<MainLayout>
 				<div className="mx-auto space-y-12 py-10 xl:max-w-[1080px] 2xl:max-w-screen-xl">
-					<div className="flex h-fit flex-col items-center gap-4 px-3 lg:flex-row xl:px-0">
-						<LatestNews posts={posts} />
-						<Trending posts={posts} />
+					<div className="flex h-fit w-full flex-col items-center gap-4 px-3 lg:flex-row xl:px-0">
+						<CarouselApiDemo posts={prioritizedPost} />
+						<Trending posts={prioritizedPost} />
 					</div>
 
 					<div className="flex flex-col-reverse items-center gap-3 px-3 lg:flex-row xl:px-0">
@@ -62,7 +74,7 @@ export const Home = () => {
 							<TooltipProvider>
 								<Tooltip>
 									<TooltipTrigger asChild>
-										<div className="relative h-[108px] w-full sm:h-[168px]" onClick={handleRoute}>
+										<div className="relative h-[108px] w-full sm:h-[168px]">
 											<Image
 												src="/assets/images/word_search_banner.jpg"
 												alt="Martad get to know banner"
@@ -78,48 +90,52 @@ export const Home = () => {
 								</Tooltip>
 							</TooltipProvider>
 
-							<div className="grid grid-cols-2 gap-2 px-3 lg:px-0">
-								{posts
-									?.filter((post) => post.priority === 0) // Filter posts with priority === 0
-									.slice(0, 4) // Limit to the first 4 posts
-									.map((post) => <NewsCardBase key={post.id} post={post} />)}
-							</div>
+							<LatestNews posts={regulars} />
 						</div>
 
-						<LeaderBoard />
+						{/* <LeaderBoard /> */}
 					</div>
 
 					<TopVideos videos={videos} />
 
-					<NewsSectionContainer type="Political" hasAdvert id="politics" />
+					{/* News Section Container based on categories data*/}
 
-					<NewsSectionContainer type="Sport" hasAdvert={false} id="sports" />
-
-					<NewsSectionContainer type="Business" hasAdvert={false} id="business" />
+					{prioritized.map((category) => (
+						<NewsSectionContainer
+							key={category.id}
+							type={category.name}
+							hasAdvert={category.id % 2 === 0}
+							id={category.name.toLowerCase()}
+							posts={postsByCategory[category.name]}
+						/>
+					))}
 
 					<div className="h-[183px]">
 						<Ads />
 					</div>
 
-					<div className="px-3 pt-10 lg:pt-0 xl:px-0">
-						<h2 className="font-Cormorant text-[32px] font-bold">Gossip of the Town</h2>
+					<section className="px-3 pt-10 lg:pt-0 xl:px-0">
+						<h2 className="font-Cormorant text-[32px] font-bold">{gossip?.name}</h2>
 
 						<div className="grid w-full grid-cols-1 place-items-center gap-3 lg:grid-cols-3">
-							<NewsCardSmall />
-							<NewsCardSmall />
-							<NewsCardSmall />
-							<NewsCardSmall />
-							<NewsCardSmall />
-							<NewsCardSmall />
+							{gossip &&
+								postsByCategory[gossip.name]?.map((post) => (
+									<NewsCardSmall key={post.id} post={post} />
+								))}
 						</div>
-					</div>
+					</section>
 
-					<NewsSectionContainer type="Entertainment" hasAdvert={false} id="entertainment" />
-
-					<div className="flex flex-col items-center gap-4 px-3 md:flex-row md:justify-between">
-						<NewsSectionExtras title="Entertainment" />
-						<NewsSectionExtras title="Health" />
-						<NewsSectionExtras title="Education" />
+					<div className="flex flex-wrap justify-start gap-4 px-3">
+						{nonPrioritized.map((cat) => (
+							<div
+								key={cat.id}
+								className="flex w-full flex-col items-start sm:w-[48%] md:w-[32%]">
+								<h1 className="mb-5 text-center font-Poppins text-3xl font-semibold">
+									{cat.name}
+								</h1>
+								<NewsSectionExtras posts={postsByCategory[cat.name]} />
+							</div>
+						))}
 					</div>
 				</div>
 			</MainLayout>

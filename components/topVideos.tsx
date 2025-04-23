@@ -1,21 +1,25 @@
 import React from "react"
+import { Video } from "@/types/types"
+import { convertToEmbedUrl } from "@/helpers/convertToEmbed"
 import Image from "next/image"
-import { VideoType } from "@/queries/posts"
 
-export default function TopVideos({ videos }: { videos: VideoType[] }) {
+export default function TopVideos({ videos }: { videos: Video[] }) {
 	return (
 		<div className="mt-10 w-full">
 			<div className="inline-flex items-center gap-2 px-3 pb-4">
 				<span className="font-base font-Poppins text-lg font-medium">Top Videos</span>
-				<img src="/assets/icons/top-video.svg" alt="Top videos icon" />
+				<Image
+					src="/assets/icons/top-video.svg"
+					alt="Top videos icon"
+					width={24}
+					height={24}
+				/>
 			</div>
 
 			{/* Horizontal Scroll Area */}
 			<div className="flex w-full overflow-x-auto border border-primary-normal">
 				<div className="flex space-x-4 p-4">
-					{videos.map((video) => (
-						<VideoCard key={video.id} video={video} />
-					))}
+					{videos?.map((video) => <VideoCard key={video.id} video={video} />)}
 				</div>
 			</div>
 			{/* Optional Gradient Effect */}
@@ -23,23 +27,18 @@ export default function TopVideos({ videos }: { videos: VideoType[] }) {
 	)
 }
 
-export function VideoCard({ video }: { video: VideoType }) {
+export function VideoCard({ video }: { video: Video }) {
 	return (
-		<div className="flex h-fit w-[200px] flex-col gap-4 p-2 md:w-[450px] md:flex-row">
-			<div className="relative h-[89px] max-h-[163px] w-full max-w-[200px] shrink-0 md:h-[163px]">
-				<Image
-					src="/assets/images/frame3.jpg"
-					alt="News description"
-					className="object-cover"
-					fill
-				/>
-				<div className="absolute inset-0 bg-black opacity-50"></div>
-
-				<img
-					src="/assets/icons/video-icon.svg"
-					alt="video icon"
-					className="absolute h-10 w-10"
-					style={{ top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}
+		<div className="flex h-fit w-[200px] flex-col gap-4 p-2 md:w-full md:max-w-[650px] md:flex-row">
+			<div className="group h-[120px] w-full shrink-0 overflow-hidden rounded-lg border md:h-[200px] md:w-[300px]">
+				<iframe
+					className="h-full w-full cursor-auto group-hover:cursor-pointer"
+					// src={video.video_link}
+					src={convertToEmbedUrl(video.video_link)}
+					title={video.title}
+					frameBorder="0"
+					allow="autoplay; fullscreen; clipboard-write; encrypted-media; picture-in-picture"
+					allowFullScreen
 				/>
 			</div>
 

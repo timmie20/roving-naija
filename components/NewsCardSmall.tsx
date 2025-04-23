@@ -1,36 +1,39 @@
 import React from "react"
 import Image from "next/image"
+import { Post } from "@/types/types"
+import { timeAgo } from "@/helpers/TimeFormater"
+import { Title } from "./shared/Title"
 
-export default function NewsCardSmall() {
+export default function NewsCardSmall({ post }: { post: Post }) {
 	return (
 		<div className="flex w-fit items-start justify-between gap-3 pt-4">
 			<div className="flex flex-shrink-0 flex-col">
-				<Image
-					src="/assets/images/headshot.jpg"
-					alt="Trending preview image"
-					width={108}
-					height={90}
-					priority
-				/>
+				<div className="relative h-[90px] w-[108px] shrink-0">
+					<Image
+						src={post?.image[0]}
+						alt={post?.title}
+						className="object-cover"
+						fill
+						priority
+					/>
+				</div>
 				<div className="mt-1.5 inline-flex items-center gap-1 text-primary-normal">
 					<span>
-						<img
+						{/* <img
 							src="/assets/icons/clock.svg"
 							alt="Clock icon"
 							className="text-primary-normal"
-						/>
+						/> */}
 					</span>
 					<span className="text-[12px]">
-						<i>2 hours ago</i>
+						<i>{timeAgo(post.created_at)}</i>
 					</span>
 				</div>
 			</div>
 
-			<h4 className="links line-clamp-3 text-balance font-Poppins font-normal decoration-inherit hover:cursor-pointer hover:underline hover:decoration-2">
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis ratione recusandae
-				facilis error accusantium laboriosam, nulla tenetur? Quasi nesciunt voluptas, dolorum
-				vel, molestiae corporis doloribus atque rem nobis, quibusdam recusandae?
-			</h4>
+			<Title slug={post.id} size="sm">
+				{post.title}
+			</Title>
 		</div>
 	)
 }
