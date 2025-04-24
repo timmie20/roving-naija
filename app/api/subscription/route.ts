@@ -41,6 +41,7 @@ export async function POST() {
 				},
 			}
 		)
+
 		// const response = await axios.post(
 		// 	"https://martadapi.com/rovingnaija/index.php",
 		// 	{ msisdn: parsedPayload.msisdn, action: "OER" }, // Sending only the msisdn

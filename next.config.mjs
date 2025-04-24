@@ -5,9 +5,15 @@ const nextConfig = {
 		remotePatterns: [
 			{
 				protocol: "http",
+				hostname: "dashboard.rovingnaija.com",
+				port: "",
+				pathname: "/storage/posts/**",
+			},
+			{
+				protocol: "http",
 				hostname: "34.29.221.229",
-				port: "", // leave empty unless you're using a custom port
-				pathname: "/storage/posts/**", // match all image paths under /storage/posts/
+				port: "",
+				pathname: "/storage/posts/**",
 			},
 		],
 	},
