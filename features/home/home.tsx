@@ -18,11 +18,11 @@ import {
 } from "@/components/ui/tooltip"
 import { useCategorizedData } from "@/hooks/useCategorizedData"
 import { CarouselApiDemo } from "@/components/scroller"
-import LatestNews from "@/components/LatestNews"
 import { useSubscribed } from "@/hooks/useCheckSubscription"
 import { useRouter } from "next/navigation"
 import SubscribeDialog from "@/components/SubscribeDialog"
 import Spinner from "@/components/shared/spinner"
+import LatestNews from "@/components/LatestNews"
 
 export const Home = () => {
 	const {
