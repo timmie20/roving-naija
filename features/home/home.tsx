@@ -22,7 +22,7 @@ import { useSubscribed } from "@/hooks/useCheckSubscription"
 import { useRouter } from "next/navigation"
 import SubscribeDialog from "@/components/SubscribeDialog"
 import Spinner from "@/components/shared/spinner"
-import LatestNews from "@/components/LatestNews"
+import LatestNews from "@/components/latestNews"
 
 export const Home = () => {
 	const {

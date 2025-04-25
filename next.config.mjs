@@ -4,7 +4,7 @@ const nextConfig = {
 	images: {
 		remotePatterns: [
 			{
-				protocol: "http",
+				protocol: "https",
 				hostname: "dashboard.rovingnaija.com",
 				port: "",
 				pathname: "/storage/posts/**",
