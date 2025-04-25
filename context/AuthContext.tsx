@@ -2,13 +2,7 @@
 import Cookies from "js-cookie"
 import React from "react"
 import { UserProps } from "@/types/types"
-import {
-	useGetCookies,
-	useSetCookie,
-	useHasCookie,
-	useDeleteCookie,
-	useGetCookie,
-} from "cookies-next"
+import { useSetCookie } from "cookies-next"
 
 type FormType = string
 

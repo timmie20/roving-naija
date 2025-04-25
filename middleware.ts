@@ -7,14 +7,14 @@ import { cookies } from "next/headers"
 
 const protectedRoutes = ["/", "/play-game"]
 
-const publicRoutes = [
-	"/contact-us",
-	"/faqs",
-	"/instructions",
-	"/pricing",
-	"/advert",
-	"/auth",
-]
+// const publicRoutes = [
+// 	"/contact-us",
+// 	"/faqs",
+// 	"/instructions",
+// 	"/pricing",
+// 	"/advert",
+// 	"/auth",
+// ]
 
 export async function middleware(request: NextRequest) {
 	const path = request.nextUrl.pathname
