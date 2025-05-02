@@ -21,9 +21,9 @@ export function TopNewsPreview({ post }: { post: Post }) {
 
 				<div className="mt-4 flex items-center justify-between">
 					<aside className="flex items-center gap-3">
-						{/* <i>
-							<small className="text-[8px] sm:text-xs">By Mark Obidiegwu</small>
-						</i> */}
+						<i>
+							<small className="text-[8px] sm:text-xs">Roving 9ja</small>
+						</i>
 						<i>
 							<small className="text-[8px] sm:text-xs">
 								{format(post.created_at, "do MMMM yyyy")}

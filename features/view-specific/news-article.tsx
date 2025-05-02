@@ -16,7 +16,7 @@ export const NewsArticle = ({ post }: { post: Post | undefined }) => {
 
 	return (
 		<MainLayout>
-			<main className="mx-auto mt-6 flex max-w-screen-xl flex-col lg:flex-row">
+			<main className="mx-auto mt-6 flex max-w-screen-xl flex-col px-4 lg:flex-row lg:px-0">
 				<article className="lg:w-2/3 lg:pr-8">
 					<h2 className="mb-2 text-3xl font-bold">{post?.title}</h2>
 					<p className="mb-4 text-gray-600">
@@ -33,7 +33,7 @@ export const NewsArticle = ({ post }: { post: Post | undefined }) => {
 								<div className="relative h-[200px] w-full shrink-0 rounded-lg md:h-[400px]">
 									<Image
 										src={post.image[index]}
-										alt="Related News"
+										alt={post.title}
 										style={{ width: "100%" }}
 										priority
 										fill

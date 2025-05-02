@@ -31,9 +31,9 @@ export function CarouselApiDemo({ posts }: { posts: Post[] }) {
 	// }, [api])
 
 	return (
-		<div className="">
+		<div className="flex-1">
 			<span className="font-base pl-2 font-Poppins font-medium">Top News</span>
-			<div className="mt-6 flex-1">
+			<div className="mt-6">
 				<Carousel
 					setApi={setApi}
 					className="w-screen px-2 sm:px-4 md:px-6 lg:w-full lg:px-0"
@@ -42,7 +42,7 @@ export function CarouselApiDemo({ posts }: { posts: Post[] }) {
 							delay: 3000,
 						}),
 					]}>
-					<CarouselContent>
+					<CarouselContent className="">
 						{posts.slice(0, 4).map((post, index) => (
 							<CarouselItem key={index}>
 								<TopNewsPreview post={post} />

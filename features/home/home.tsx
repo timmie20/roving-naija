@@ -70,7 +70,7 @@ export const Home = () => {
 					</div>
 
 					<div className="flex flex-col-reverse items-center gap-3 px-3 lg:flex-row xl:px-0">
-						<div className="flex-1 space-y-6">
+						<div className="w-screen flex-1 space-y-6">
 							<TooltipProvider>
 								<Tooltip>
 									<TooltipTrigger asChild>

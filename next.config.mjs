@@ -15,6 +15,12 @@ const nextConfig = {
 				port: "",
 				pathname: "/storage/posts/**",
 			},
+			{
+				protocol: "https",
+				hostname: "dummyimage.com",
+				port: "",
+				pathname: "/**",
+			},
 		],
 	},
 }

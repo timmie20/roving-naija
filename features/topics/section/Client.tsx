@@ -20,7 +20,14 @@ export default function Client({ posts }: { posts: Post[] }) {
 			<div className="my-6 space-y-6">
 				<div className="flex flex-col rounded-lg px-3 md:flex-row xl:px-0">
 					<div className="relative h-[200px] w-full shrink-0 rounded-lg md:h-[400px] md:w-1/2">
-						<Image src={largePost.image[0]} alt={largePost.title} fill />
+						<Image
+							src={largePost.image[0]}
+							alt={largePost.title}
+							style={{ width: "100%" }}
+							priority
+							fill
+							className="object-cover"
+						/>
 					</div>
 					<div className="mt-4 md:ml-6 md:mt-0">
 						<Title slug={largePost.id} size="lg">

@@ -6,7 +6,7 @@ import { format } from "date-fns"
 
 export default function Trending({ posts }: { posts: Post[] }) {
 	return (
-		<div className="h-full w-fit flex-none shrink-0 lg:max-w-[350px]">
+		<div className="h-full w-full flex-none shrink-0 lg:max-w-[350px]">
 			<div className="inline-flex items-center gap-2 pb-4">
 				<span className="font-base font-Poppins font-medium">Trending</span>
 				<Image src="/assets/icons/trend-up.svg" alt="trending icon" width={24} height={24} />

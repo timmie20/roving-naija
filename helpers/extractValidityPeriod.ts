@@ -5,6 +5,8 @@ export const checkValidity = (time: string): SubscriptionObj | null => {
 	let validityPeriod: Date | null = null
 	const currentTime = new Date()
 
+	console.log()
+
 	if (response) {
 		validityPeriod = new Date(response[0])
 
@@ -17,6 +19,6 @@ export const checkValidity = (time: string): SubscriptionObj | null => {
 		}
 	} else {
 		console.log("Invalid date format.")
-		return null
+		return { isValid: false, date: null }
 	}
 }

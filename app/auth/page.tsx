@@ -31,7 +31,7 @@ export default function Page() {
 			<div
 				className={`${styles.auth_bg} flex h-screen w-screen items-center justify-end lg:px-2`}>
 				<div
-					className={`${styles.glass_morph_effect} flex h-full w-full rounded-none px-2 py-3 lg:max-w-[651px] lg:border lg:border-app-white xl:max-h-[90vh] xl:rounded-lg`}>
+					className={`${styles.glass_morph_effect} flex h-full w-full overflow-y-auto rounded-none px-6 pb-5 pt-3 md:pb-0 lg:max-w-[651px] lg:border lg:border-app-white xl:max-h-[95vh] xl:rounded-lg`}>
 					<div className="mx-auto flex w-full max-w-md flex-col items-center">
 						<Link href="/">
 							<Image src={logo} alt="Roving naija logo" priority />

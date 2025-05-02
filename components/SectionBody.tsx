@@ -66,29 +66,31 @@ export const SectionWithAds = ({ posts }: { posts: Post[] }) => {
 
 export const SectionWithoutAds = ({ posts }: { posts: Post[] }) => {
 	const firstPost = posts?.[0]
+	if (!firstPost) return null
+
 	return (
 		<>
 			<div className="w-full">
 				<div className="flex flex-col rounded-lg p-6 md:flex-row md:p-0">
 					<div className="relative h-[200px] w-full shrink-0 rounded-lg md:h-[400px] md:w-1/2">
 						<Image
-							src={firstPost?.image[0]}
-							className="object-fit"
-							alt="Portrait of a man wearing glasses and a blue shirt"
+							src={firstPost?.image?.[0] || "https://dummyimage.com/600x400&text=roving9ja.com"}
+							className="object-cover"
+							alt={firstPost.title || "Post image"}
 							fill
 						/>
 					</div>
 					<div className="mt-4 md:ml-6 md:mt-0">
-						<Title slug={firstPost.id} size="lg">
-							{firstPost.title}
+						<Title slug={firstPost?.id} size="lg">
+							{firstPost?.title}
 						</Title>
 						{/* <h1 className="mb-4 text-2xl font-bold md:text-3xl">{firstPost?.title}</h1> */}
 						<p className="mb-4 line-clamp-6 text-gray-700">{firstPost?.content}</p>
 						<div className="flex items-center text-gray-600">
-							<span className="italic">By Mark Obidiegwu</span>
+							<span className="italic">Roving 9ja</span>
 							<span className="mx-2">|</span>
 							<i className="far fa-clock mr-2"></i>
-							<span>{timeAgo(firstPost.created_at)}</span>
+							<span>{timeAgo(firstPost?.created_at)}</span>
 						</div>
 					</div>
 				</div>
