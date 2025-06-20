@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import {
 	Form,
 	FormControl,
@@ -19,16 +19,25 @@ import { toast } from "sonner"
 import { useRouter } from "next/navigation"
 
 export default function Login<T>({
-	setRedirecting,
 	setFormType,
+	setRedirecting,
 }: {
-	setRedirecting: React.Dispatch<React.SetStateAction<boolean>>
 	setFormType: React.Dispatch<React.SetStateAction<T>>
+	setRedirecting: React.Dispatch<React.SetStateAction<boolean>>
 }) {
 	const [loading, setLoading] = useState(false)
 	const { loginUser } = useAuthContext()
-
 	const router = useRouter()
+
+	useEffect(() => {
+		const handleRouteChange = () => setRedirecting(false)
+		// @ts-expect-error: Next.js router.events is not typed in app router
+		if (router.events?.on) router.events.on("routeChangeComplete", handleRouteChange)
+		return () => {
+			// @ts-expect-error: Next.js router.events is not typed in app router
+			if (router.events?.off) router.events.off("routeChangeComplete", handleRouteChange)
+		}
+	}, [router, setRedirecting])
 
 	const formSchema = z.object({
 		msisdn: z.string().min(11, {
@@ -57,9 +66,8 @@ export default function Login<T>({
 		setLoading(true)
 		try {
 			const response = await backendLogin(values)
-
+			console.log(response)
 			const isLoginSuccess = response?.success
-
 			if (!isLoginSuccess) {
 				toast.error(response?.data?.message || "User login failed")
 				return
@@ -68,9 +76,9 @@ export default function Login<T>({
 					msisdn: response?.data.user?.msisdn,
 					token: response?.data?.token,
 				}
+				setRedirecting(true)
 				router.push("/")
 				loginUser(user)
-				setRedirecting(true)
 				toast.success(response?.data?.message)
 			}
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any

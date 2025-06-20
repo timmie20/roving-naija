@@ -11,6 +11,8 @@ interface AuthContextProps {
 	formType: FormType
 	setFormType: React.Dispatch<React.SetStateAction<FormType>>
 	loginUser: (user: UserProps) => void
+	redirecting: boolean
+	setRedirecting: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const defaultContext: AuthContextProps = {
@@ -18,6 +20,8 @@ const defaultContext: AuthContextProps = {
 	formType: "register",
 	setFormType: () => {},
 	loginUser: async () => {},
+	redirecting: false,
+	setRedirecting: () => {},
 }
 
 // Create the AuthContext
@@ -27,6 +31,7 @@ export const AuthContext = React.createContext<AuthContextProps>(defaultContext)
 export const AuthContextProvider = ({ children }: React.PropsWithChildren & {}) => {
 	const [user, setUser] = React.useState<UserProps | null>(null)
 	const [formType, setFormType] = React.useState<FormType>("register")
+	const [redirecting, setRedirecting] = React.useState(false)
 
 	const setCookie = useSetCookie()
 
@@ -54,7 +59,8 @@ export const AuthContextProvider = ({ children }: React.PropsWithChildren & {}) 
 
 	// Provide the context
 	return (
-		<AuthContext.Provider value={{ user, loginUser, formType, setFormType }}>
+		<AuthContext.Provider
+			value={{ user, loginUser, formType, setFormType, redirecting, setRedirecting }}>
 			{children}
 		</AuthContext.Provider>
 	)

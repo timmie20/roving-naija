@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from "react"
+import React from "react"
 import styles from "@/components/auth/auth.module.css"
 import Image from "next/image"
 import logo from "@/public/assets/images/roving-naija-logo.svg"
@@ -8,11 +8,11 @@ import Register from "@/components/auth/Register"
 import Login from "@/components/auth/Login"
 import Link from "next/link"
 import { useAuthContext } from "@/context/AuthContext"
+import RedirectingModal from "@/components/shared/RedirectingModal"
 
 export default function Page() {
 	const { formType, setFormType } = useAuthContext()
-
-	const [redirecting, setRedirecting] = useState(false)
+	const [redirecting, setRedirecting] = React.useState(false)
 
 	function toggleFormType(e: React.MouseEvent<HTMLButtonElement>) {
 		if (e.target && e.target instanceof HTMLElement) {
@@ -22,12 +22,7 @@ export default function Page() {
 	}
 	return (
 		<>
-			{redirecting && (
-				<div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/60 backdrop-blur-sm">
-					<div className="h-10 w-10 animate-spin rounded-full border-4 border-white border-t-transparent" />
-					<p className="mt-4 text-lg font-medium text-white">Redirecting to our homepage...</p>
-				</div>
-			)}
+			<RedirectingModal open={redirecting} />
 			<div
 				className={`${styles.auth_bg} flex h-screen w-screen items-center justify-end lg:px-2`}>
 				<div
@@ -41,7 +36,7 @@ export default function Page() {
 							<Button
 								variant="ghost"
 								size="lg"
-								onClick={(e) => toggleFormType(e)}
+								onClick={toggleFormType}
 								className="w-full"
 								style={
 									formType === "register"
@@ -52,7 +47,7 @@ export default function Page() {
 							</Button>
 							<Button
 								variant="ghost"
-								onClick={(e) => toggleFormType(e)}
+								onClick={toggleFormType}
 								size="lg"
 								className="w-full"
 								style={

@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import {
 	Form,
 	FormControl,
@@ -29,6 +29,16 @@ export default function Register<T>({
 	const { loginUser } = useAuthContext()
 	const [loading, setLoading] = useState(false)
 	const router = useRouter()
+
+	useEffect(() => {
+		const handleRouteChange = () => setRedirecting(false)
+		// @ts-expect-error: Next.js router.events is not typed in app router
+		if (router.events?.on) router.events.on("routeChangeComplete", handleRouteChange)
+		return () => {
+			// @ts-expect-error: Next.js router.events is not typed in app router
+			if (router.events?.off) router.events.off("routeChangeComplete", handleRouteChange)
+		}
+	}, [router, setRedirecting])
 
 	const formSchema = z.object({
 		fullname: z.string().min(5, {
@@ -67,7 +77,6 @@ export default function Register<T>({
 		setLoading(true)
 
 		try {
-			// First API call: Register on backend
 			const backendResult = await backendRegister(values)
 			console.log("Backend Result:", backendResult)
 
@@ -85,7 +94,6 @@ export default function Register<T>({
 
 			toast.success(backendResult.data?.message)
 
-			// Second API call: VAS registration
 			console.log("Proceeding to call vasRegister...")
 
 			const vasResult = await vasRegister({
