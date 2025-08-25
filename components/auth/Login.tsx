@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import {
 	Form,
 	FormControl,
@@ -20,24 +20,24 @@ import { useRouter } from "next/navigation"
 
 export default function Login<T>({
 	setFormType,
-	setRedirecting,
+	// setRedirecting,
 }: {
 	setFormType: React.Dispatch<React.SetStateAction<T>>
-	setRedirecting: React.Dispatch<React.SetStateAction<boolean>>
+	// setRedirecting: React.Dispatch<React.SetStateAction<boolean>>
 }) {
 	const [loading, setLoading] = useState(false)
 	const { loginUser } = useAuthContext()
 	const router = useRouter()
 
-	useEffect(() => {
-		const handleRouteChange = () => setRedirecting(false)
-		// @ts-expect-error: Next.js router.events is not typed in app router
-		if (router.events?.on) router.events.on("routeChangeComplete", handleRouteChange)
-		return () => {
-			// @ts-expect-error: Next.js router.events is not typed in app router
-			if (router.events?.off) router.events.off("routeChangeComplete", handleRouteChange)
-		}
-	}, [router, setRedirecting])
+	// useEffect(() => {
+	// 	const handleRouteChange = () => setRedirecting(false)
+	// 	// @ts-expect-error: Next.js router.events is not typed in app router
+	// 	if (router.events?.on) router.events.on("routeChangeComplete", handleRouteChange)
+	// 	return () => {
+	// 		// @ts-expect-error: Next.js router.events is not typed in app router
+	// 		if (router.events?.off) router.events.off("routeChangeComplete", handleRouteChange)
+	// 	}
+	// }, [router, setRedirecting])
 
 	const formSchema = z.object({
 		msisdn: z.string().min(11, {
@@ -76,7 +76,6 @@ export default function Login<T>({
 					msisdn: response?.data.user?.msisdn,
 					token: response?.data?.token,
 				}
-				setRedirecting(true)
 				router.push("/")
 				loginUser(user)
 				toast.success(response?.data?.message)
