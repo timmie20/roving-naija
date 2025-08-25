@@ -69,7 +69,7 @@ export default function Page() {
 							{formType === "register" ? (
 								<Register setFormType={setFormType} setRedirecting={setRedirecting} />
 							) : (
-								<Login setFormType={setFormType} setRedirecting={setRedirecting} />
+								<Login setFormType={setFormType} />
 							)}
 						</div>
 					</div>
