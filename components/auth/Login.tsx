@@ -76,9 +76,9 @@ export default function Login<T>({
 					msisdn: response?.data.user?.msisdn,
 					token: response?.data?.token,
 				}
-				router.push("/")
 				loginUser(user)
 				toast.success(response?.data?.message)
+				router.push("/")
 			}
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		} catch (error: any) {
