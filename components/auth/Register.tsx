@@ -148,7 +148,7 @@ export default function Register<T>({
 								<FormLabel>Phone number</FormLabel>
 								<FormControl>
 									<Input
-										placeholder="09126357897"
+										placeholder="e.g 09126357897"
 										{...field}
 										className="bg-app-white text-app-dark placeholder:italic"
 									/>

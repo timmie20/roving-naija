@@ -108,7 +108,7 @@ export default function Login<T>({
 								<FormLabel>Phone Number</FormLabel>
 								<FormControl>
 									<Input
-										placeholder="09157505223"
+										placeholder="e.g 09157505223"
 										{...field}
 										className="bg-app-white text-app-dark placeholder:italic"
 									/>
