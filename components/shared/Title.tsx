@@ -20,7 +20,7 @@ const headingStyles = cva(
 			},
 			intent: {
 				default: "text-black",
-				highlight: "text-blue-600",
+				highlight: "text-blue-700",
 			},
 		},
 		defaultVariants: {

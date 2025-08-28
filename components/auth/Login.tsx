@@ -108,9 +108,9 @@ export default function Login<T>({
 								<FormLabel>Phone Number</FormLabel>
 								<FormControl>
 									<Input
-										placeholder="2349157505223"
+										placeholder="09157505223"
 										{...field}
-										className="bg-app-white text-app-dark"
+										className="bg-app-white text-app-dark placeholder:italic"
 									/>
 								</FormControl>
 								<FormMessage />
@@ -125,7 +125,11 @@ export default function Login<T>({
 							<FormItem>
 								<FormLabel>Password</FormLabel>
 								<FormControl>
-									<Input placeholder="" {...field} className="bg-app-white text-app-dark" />
+									<Input
+										placeholder=""
+										{...field}
+										className="bg-app-white text-app-dark placeholder:italic"
+									/>
 								</FormControl>
 								<FormMessage />
 							</FormItem>

@@ -8,11 +8,11 @@ import Register from "@/components/auth/Register"
 import Login from "@/components/auth/Login"
 import Link from "next/link"
 import { useAuthContext } from "@/context/AuthContext"
-import RedirectingModal from "@/components/shared/RedirectingModal"
+// import RedirectingModal from "@/components/shared/RedirectingModal"
 
 export default function Page() {
 	const { formType, setFormType } = useAuthContext()
-	const [redirecting, setRedirecting] = React.useState(false)
+	// const [redirecting, setRedirecting] = React.useState(false)
 
 	function toggleFormType(e: React.MouseEvent<HTMLButtonElement>) {
 		if (e.target && e.target instanceof HTMLElement) {
@@ -22,7 +22,7 @@ export default function Page() {
 	}
 	return (
 		<>
-			<RedirectingModal open={redirecting} />
+			{/* <RedirectingModal open={redirecting} /> */}
 			<div
 				className={`${styles.auth_bg} flex h-screen w-screen items-center justify-end lg:px-2`}>
 				<div
@@ -67,7 +67,7 @@ export default function Page() {
 
 						<div className="mt-4 w-full">
 							{formType === "register" ? (
-								<Register setFormType={setFormType} setRedirecting={setRedirecting} />
+								<Register setFormType={setFormType} />
 							) : (
 								<Login setFormType={setFormType} />
 							)}

@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import {
 	Form,
 	FormControl,
@@ -21,24 +21,24 @@ import { useRouter } from "next/navigation"
 
 export default function Register<T>({
 	setFormType,
-	setRedirecting,
+	// setRedirecting,
 }: {
 	setFormType: React.Dispatch<React.SetStateAction<T>>
-	setRedirecting: React.Dispatch<React.SetStateAction<boolean>>
+	// setRedirecting: React.Dispatch<React.SetStateAction<boolean>>
 }) {
 	const { loginUser } = useAuthContext()
 	const [loading, setLoading] = useState(false)
 	const router = useRouter()
 
-	useEffect(() => {
-		const handleRouteChange = () => setRedirecting(false)
-		// @ts-expect-error: Next.js router.events is not typed in app router
-		if (router.events?.on) router.events.on("routeChangeComplete", handleRouteChange)
-		return () => {
-			// @ts-expect-error: Next.js router.events is not typed in app router
-			if (router.events?.off) router.events.off("routeChangeComplete", handleRouteChange)
-		}
-	}, [router, setRedirecting])
+	// useEffect(() => {
+	// 	const handleRouteChange = () => setRedirecting(false)
+	// 	// @ts-expect-error: Next.js router.events is not typed in app router
+	// 	if (router.events?.on) router.events.on("routeChangeComplete", handleRouteChange)
+	// 	return () => {
+	// 		// @ts-expect-error: Next.js router.events is not typed in app router
+	// 		if (router.events?.off) router.events.off("routeChangeComplete", handleRouteChange)
+	// 	}
+	// }, [router, setRedirecting])
 
 	const formSchema = z.object({
 		fullname: z.string().min(5, {
@@ -90,9 +90,9 @@ export default function Register<T>({
 				msisdn: backendResult?.data.user?.msisdn,
 				token: backendResult?.data?.token,
 			}
-			loginUser(user)
 
 			toast.success(backendResult.data?.message)
+			loginUser(user)
 
 			console.log("Proceeding to call vasRegister...")
 
@@ -105,9 +105,8 @@ export default function Register<T>({
 			console.log("VAS Result:", vasResult)
 
 			if (vasResult?.success && vasResult.data?.status === 200) {
-				setRedirecting(true)
-				router.push("/")
 				toast.success(vasResult.data?.message)
+				router.push("/")
 			} else {
 				toast.error(vasResult?.data?.message || "VAS registration failed")
 			}
@@ -131,9 +130,9 @@ export default function Register<T>({
 								<FormLabel>Name</FormLabel>
 								<FormControl>
 									<Input
-										placeholder="John Doe"
+										placeholder="e.g John Doe"
 										{...field}
-										className="bg-app-white text-app-dark"
+										className="bg-app-white text-app-dark placeholder:italic"
 									/>
 								</FormControl>
 								<FormMessage />
@@ -151,7 +150,7 @@ export default function Register<T>({
 									<Input
 										placeholder="09126357897"
 										{...field}
-										className="bg-app-white text-app-dark"
+										className="bg-app-white text-app-dark placeholder:italic"
 									/>
 								</FormControl>
 								<FormMessage />
@@ -168,7 +167,7 @@ export default function Register<T>({
 									<Input
 										placeholder="example@email.com"
 										{...field}
-										className="bg-app-white text-app-dark"
+										className="bg-app-white text-app-dark placeholder:italic"
 									/>
 								</FormControl>
 								<FormMessage />
@@ -182,7 +181,11 @@ export default function Register<T>({
 							<FormItem>
 								<FormLabel>Password</FormLabel>
 								<FormControl>
-									<Input placeholder="" {...field} className="bg-app-white text-app-dark" />
+									<Input
+										placeholder=""
+										{...field}
+										className="bg-app-white text-app-dark placeholder:italic"
+									/>
 								</FormControl>
 								<FormMessage />
 							</FormItem>

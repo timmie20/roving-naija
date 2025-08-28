@@ -7,6 +7,7 @@ import { useEffect, useRef } from "react"
 import { useSubscribed } from "@/hooks/useCheckSubscription"
 import SubscribeDialog from "@/components/SubscribeDialog"
 import Spinner from "@/components/shared/spinner"
+import NoPostFound from "@/components/NoPostFound"
 
 export const SectionPage = () => {
 	const params = useParams()
@@ -32,7 +33,7 @@ export const SectionPage = () => {
 	if (isFetching) return <Spinner />
 
 	const posts = data && "data" in data ? data.data : []
-	if (!posts.length) return <div>No posts found.</div>
+	if (!posts.length) return <NoPostFound />
 
 	if (isValid === false) {
 		return <SubscribeDialog dialogRef={dialogRef} />

@@ -9,7 +9,7 @@ export default function LatestNews({ posts }: { posts: Post[] }) {
 
 			<div className="grid grid-cols-2 gap-2 px-3 lg:grid-cols-3 lg:px-0">
 				{posts
-					.slice(0, 12) // Limit to the first 4 posts
+					.slice(0, 12) // Limit to the first 12 posts
 					.map((post) => (
 						<NewsCardBase key={post.id} post={post} />
 					))}

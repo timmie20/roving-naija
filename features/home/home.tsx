@@ -60,6 +60,8 @@ export const Home = () => {
 	if (isValid === false) {
 		return <SubscribeDialog dialogRef={dialogRef} />
 	}
+
+	console.log("hello", nonPrioritized)
 	return (
 		<>
 			<MainLayout>
@@ -126,16 +128,13 @@ export const Home = () => {
 					</section>
 
 					<div className="flex flex-wrap justify-start gap-4 px-3">
-						{nonPrioritized.map((cat) => (
-							<div
-								key={cat.id}
-								className="flex w-full flex-col items-start sm:w-[48%] md:w-[32%]">
-								<h1 className="mb-5 text-center font-Poppins text-3xl font-semibold">
-									{cat.name}
-								</h1>
-								<NewsSectionExtras posts={postsByCategory[cat.name]} />
-							</div>
-						))}
+						{nonPrioritized
+							.filter((cat) => postsByCategory[cat.name]?.length > 0) // ✅ keep only categories with posts
+							.map((cat) => (
+								<div key={cat.id} className="flex w-full flex-col sm:w-[48%] md:w-[32%]">
+									<NewsSectionExtras posts={postsByCategory[cat.name]} />
+								</div>
+							))}
 					</div>
 				</div>
 			</MainLayout>
