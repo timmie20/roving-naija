@@ -23,6 +23,7 @@ import { useRouter } from "next/navigation"
 import SubscribeDialog from "@/components/SubscribeDialog"
 import Spinner from "@/components/shared/spinner"
 import LatestNews from "@/components/latestNews"
+import Link from "next/link"
 
 export const Home = () => {
 	const {
@@ -61,7 +62,6 @@ export const Home = () => {
 		return <SubscribeDialog dialogRef={dialogRef} />
 	}
 
-	console.log("hello", nonPrioritized)
 	return (
 		<>
 			<MainLayout>
@@ -76,15 +76,17 @@ export const Home = () => {
 							<TooltipProvider>
 								<Tooltip>
 									<TooltipTrigger asChild>
-										<div className="relative h-[108px] w-full sm:h-[168px]">
-											<Image
-												src="/assets/images/word_search_banner.jpg"
-												alt="Martad get to know banner"
-												fill
-												priority
-												className="cursor-pointer transition-all duration-150 hover:scale-105"
-											/>
-										</div>
+										<Link href="/play-game">
+											<div className="relative h-[108px] w-full sm:h-[168px]">
+												<Image
+													src="/assets/images/word_search_banner.jpg"
+													alt="Martad get to know banner"
+													fill
+													priority
+													className="cursor-pointer transition-all duration-150 hover:scale-105"
+												/>
+											</div>
+										</Link>
 									</TooltipTrigger>
 									<TooltipContent>
 										<p>Click to play game</p>
@@ -132,7 +134,7 @@ export const Home = () => {
 							.filter((cat) => postsByCategory[cat.name]?.length > 0) // ✅ keep only categories with posts
 							.map((cat) => (
 								<div key={cat.id} className="flex w-full flex-col sm:w-[48%] md:w-[32%]">
-									<NewsSectionExtras posts={postsByCategory[cat.name]} />
+									<NewsSectionExtras posts={postsByCategory[cat.name].slice(0, 4)} />
 								</div>
 							))}
 					</div>

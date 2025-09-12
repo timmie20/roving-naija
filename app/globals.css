@@ -198,5 +198,5 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 .links {
-	@apply hover:cursor-pointer hover:underline hover:decoration-2;
+	@apply text-base hover:cursor-pointer hover:underline hover:decoration-2;
 }

@@ -9,12 +9,14 @@ export function NewsCardBase({ post }: { post: Post }) {
 			<div className="mx-auto h-fit w-full border border-neutral-200 p-4">
 				<div className="flex flex-col gap-3 md:flex-row">
 					<div className="relative h-[108px] w-full shrink-0 sm:size-[130px]">
-						<Image
-							src={post.image[0]}
-							alt="News description image"
-							className="object-fit flex-shrink-0"
-							fill
-						/>
+						{post.image?.length > 0 && (
+							<Image
+								src={post.image[0]}
+								alt="News description image"
+								className="object-fit flex-shrink-0"
+								fill
+							/>
+						)}
 					</div>
 					<div className="flex flex-col justify-between font-Cormorant">
 						<Title slug={post.id} size="sm">

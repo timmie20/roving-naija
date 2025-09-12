@@ -10,7 +10,7 @@ type HeadingLinkProps = {
 } & VariantProps<typeof headingStyles>
 
 const headingStyles = cva(
-	"cursor-pointer tracking-tight font-semibold hover:underline first:mt-0",
+	"cursor-pointer tracking-tight font-semibold hover:underline first:mt-0 line-clamp-3",
 	{
 		variants: {
 			size: {

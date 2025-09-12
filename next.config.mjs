@@ -10,6 +10,12 @@ const nextConfig = {
 				pathname: "/storage/posts/**",
 			},
 			{
+				protocol: "https",
+				hostname: "storage.googleapis.com",
+				port: "",
+				pathname: "/roving-naija/posts/**",
+			},
+			{
 				protocol: "http",
 				hostname: "34.29.221.229",
 				port: "",

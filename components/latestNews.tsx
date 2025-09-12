@@ -11,7 +11,7 @@ export default function LatestNews({ posts }: { posts: Post[] }) {
 				{posts
 					.slice(0, 12) // Limit to the first 12 posts
 					.map((post) => (
-						<NewsCardBase key={post.id} post={post} />
+						<NewsCardBase key={post?.id} post={post} />
 					))}
 			</div>
 		</div>

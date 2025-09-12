@@ -24,7 +24,6 @@ export const useCategorizedData = () => {
 		const postsByCategory: Record<string, Post[]> = {}
 		const prioritizedPost: Post[] = []
 		const regulars: Post[] = []
-
 		let gossip: Category | null = null
 
 		const categories = data?.categories.data || []
