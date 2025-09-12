@@ -16,7 +16,6 @@ import { Button } from "../ui/button"
 import { vasRegister, backendRegister } from "@/queries/auth"
 import { toast } from "sonner"
 import { useAuthContext } from "@/context/AuthContext"
-import { useRouter } from "next/navigation"
 // import { HttpError } from "@/types/types"
 
 export default function Register<T>({
@@ -28,7 +27,6 @@ export default function Register<T>({
 }) {
 	const { loginUser } = useAuthContext()
 	const [loading, setLoading] = useState(false)
-	const router = useRouter()
 
 	// useEffect(() => {
 	// 	const handleRouteChange = () => setRedirecting(false)
@@ -92,7 +90,6 @@ export default function Register<T>({
 			}
 
 			toast.success(backendResult.data?.message)
-			loginUser(user)
 
 			console.log("Proceeding to call vasRegister...")
 
@@ -106,7 +103,7 @@ export default function Register<T>({
 
 			if (vasResult?.success && vasResult.data?.status === 200) {
 				toast.success(vasResult.data?.message)
-				router.push("/")
+				loginUser(user)
 			} else {
 				toast.error(vasResult?.data?.message || "VAS registration failed")
 			}

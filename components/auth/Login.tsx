@@ -16,7 +16,6 @@ import { Button } from "../ui/button"
 import { backendLogin } from "@/queries/auth"
 import { useAuthContext } from "@/context/AuthContext"
 import { toast } from "sonner"
-import { useRouter } from "next/navigation"
 
 export default function Login<T>({
 	setFormType,
@@ -27,7 +26,6 @@ export default function Login<T>({
 }) {
 	const [loading, setLoading] = useState(false)
 	const { loginUser } = useAuthContext()
-	const router = useRouter()
 
 	// useEffect(() => {
 	// 	const handleRouteChange = () => setRedirecting(false)
@@ -78,7 +76,7 @@ export default function Login<T>({
 				}
 				loginUser(user)
 				toast.success(response?.data?.message)
-				router.push("/")
+				// router.push("/")
 			}
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		} catch (error: any) {

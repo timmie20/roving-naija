@@ -3,6 +3,7 @@ import Cookies from "js-cookie"
 import React from "react"
 import { UserProps } from "@/types/types"
 import { useSetCookie } from "cookies-next"
+import { useRouter } from "next/navigation"
 
 type FormType = string
 
@@ -33,6 +34,8 @@ export const AuthContextProvider = ({ children }: React.PropsWithChildren & {}) 
 	const [formType, setFormType] = React.useState<FormType>("register")
 	const [redirecting, setRedirecting] = React.useState(false)
 
+	const router = useRouter()
+
 	const setCookie = useSetCookie()
 
 	const loginUser = (user: UserProps) => {
@@ -43,9 +46,8 @@ export const AuthContextProvider = ({ children }: React.PropsWithChildren & {}) 
 			sameSite: "strict",
 			path: "/",
 		})
-		// localStorage.setItem("user-token", JSON.stringify({ token: token }))
 		setUser(user)
-		return user
+		router.push("/")
 	}
 
 	// Load user from cookie on mount
