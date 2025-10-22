@@ -18,11 +18,9 @@ export default function NewsCardLg({ post }: { post: Post }) {
 				/>
 			</div>
 			<div className="flex h-[86px] flex-col justify-between border border-[#959595] p-4 lg:h-[132px]">
-				<h3 className="links line-clamp-2 text-base font-bold text-app-dark md:line-clamp-none md:text-3xl">
-					<Title slug={post?.id} size="lg">
-						{post?.title}
-					</Title>
-				</h3>
+				<Title slug={post?.id} size="lg">
+					{post?.title} hello
+				</Title>
 				<div className="flex items-center justify-between">
 					<aside className="flex items-center gap-3">
 						<i>
