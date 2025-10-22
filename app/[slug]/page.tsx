@@ -38,5 +38,6 @@ export default function Page() {
 	if (isValid === false) {
 		return <SubscribeDialog dialogRef={dialogRef} />
 	}
-	return <NewsArticle post={data?.data} />
+
+	if (data) return <NewsArticle post={data?.data} />
 }
