@@ -39,7 +39,7 @@ export default function Client({ posts }: { posts: Post[] }) {
 							{largePost.content}
 						</p>
 						<div className="flex items-center text-gray-600">
-							<span className="text-[8px] italic sm:text-sm">Roving Niaja</span>
+							<span className="text-[8px] italic sm:text-sm">Roving Naija</span>
 							<span className="mx-2">|</span>
 							<i className="far fa-clock mr-2"></i>
 							<span className="text-[8px] sm:text-sm">

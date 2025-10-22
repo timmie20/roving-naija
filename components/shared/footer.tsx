@@ -47,7 +47,7 @@ export default function Footer() {
 					</div>
 					<div className="flex w-full justify-between lg:w-[60%]">
 						<div className="flex flex-col gap-5">
-							<Link href="/games" className="mb-4 text-balance text-sm sm:text-base">
+							<Link href="/play-game" className="mb-4 text-balance text-sm sm:text-base">
 								Play Educative Games
 							</Link>
 							<Link href="#" className="mb-4 text-balance text-sm sm:text-base">

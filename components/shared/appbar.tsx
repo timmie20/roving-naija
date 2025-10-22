@@ -20,7 +20,7 @@ const navigation = [
 	{ name: "Entertaiment", path: "/topics/entertainment" },
 	{ name: "More", path: "/more" },
 	{ name: "Contact us", path: "/contact-us" },
-	{ name: "Advertise with us", path: "/advert" },
+	{ name: "Advertise with us", path: "#" },
 ]
 
 const dropdownNav = [

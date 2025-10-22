@@ -3,6 +3,7 @@ import MainLayout from "@/components/app/MainLayout"
 import { Post } from "@/types/types"
 import Image from "next/image"
 import { format } from "date-fns"
+import { timeAgo } from "@/helpers/TimeFormater"
 
 // const data = {
 // 	title: "Breaking News: Major Event",
@@ -11,7 +12,7 @@ import { format } from "date-fns"
 // 	images: ["https://placehold.co/600x300", "https://placehold.co/600x300"],
 // }
 
-export const NewsArticle = ({ post }: { post: Post | undefined }) => {
+export const NewsArticle = ({ post }: { post: Post }) => {
 	const paragraphs = post?.content?.split("\r\n\r\n") // Split paragraphs
 
 	return (
@@ -20,7 +21,8 @@ export const NewsArticle = ({ post }: { post: Post | undefined }) => {
 				<article className="lg:w-2/3 lg:pr-8">
 					<h2 className="mb-2 text-3xl font-bold">{post?.title}</h2>
 					<p className="mb-4 text-gray-600">
-						Roving Naija , {post?.date ? format(post.date, "do MMMM yyyy") : "Unknown date"}
+						Roving Naija,
+						{""} {post.date ? format(post?.date, "do MMMM yyyy") : timeAgo(post.created_at)}
 					</p>
 
 					{paragraphs?.map((paragraph, index) => (

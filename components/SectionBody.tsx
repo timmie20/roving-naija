@@ -7,6 +7,7 @@ import NewsCardSmall from "./NewsCardSmall"
 import { Post } from "@/types/types"
 import { timeAgo } from "@/helpers/TimeFormater"
 import { Title } from "./shared/Title"
+import { format } from "date-fns"
 
 export default function SectionBody({
 	hasAdvert,
@@ -87,10 +88,15 @@ export const SectionWithoutAds = ({ posts }: { posts: Post[] }) => {
 						{/* <h1 className="mb-4 text-2xl font-bold md:text-3xl">{firstPost?.title}</h1> */}
 						<p className="mb-4 line-clamp-6 text-gray-700">{firstPost?.content}</p>
 						<div className="flex items-center text-gray-600">
-							<span className="italic">Roving 9ja</span>
+							<span className="italic">Roving Naija</span>
 							<span className="mx-2">|</span>
 							<i className="far fa-clock mr-2"></i>
-							<span>{timeAgo(firstPost?.created_at)}</span>
+							<span>
+								{" "}
+								{firstPost.date
+									? format(firstPost?.date, "do MMMM yyyy")
+									: timeAgo(firstPost.created_at)}
+							</span>
 						</div>
 					</div>
 				</div>
