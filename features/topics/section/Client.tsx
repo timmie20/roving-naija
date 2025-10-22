@@ -7,6 +7,7 @@ import NewsCardSmall from "../../../components/NewsCardSmall"
 import { Post } from "@/types/types"
 import { Title } from "@/components/shared/Title"
 import { format } from "date-fns"
+import { timeAgo } from "@/helpers/TimeFormater"
 
 export default function Client({ posts }: { posts: Post[] }) {
 	const priorityPost = posts.find((post) => post.priority === 1)
@@ -38,11 +39,13 @@ export default function Client({ posts }: { posts: Post[] }) {
 							{largePost.content}
 						</p>
 						<div className="flex items-center text-gray-600">
-							<span className="text-[8px] italic sm:text-sm">Roving 9ja</span>
+							<span className="text-[8px] italic sm:text-sm">Roving Niaja</span>
 							<span className="mx-2">|</span>
 							<i className="far fa-clock mr-2"></i>
 							<span className="text-[8px] sm:text-sm">
-								{format(largePost.created_at, "do MMMM yyyy")}
+								{largePost.date
+									? format(largePost?.date, "do MMMM yyyy")
+									: timeAgo(largePost.created_at)}
 							</span>
 						</div>
 					</div>
@@ -61,7 +64,7 @@ export default function Client({ posts }: { posts: Post[] }) {
 				<div className="px-3 xl:px-0">
 					<div className="flex h-[40px] w-full items-center bg-neutral-50 px-3 py-1">
 						<h2 className="text-center text-base font-bold text-primary-normal lg:text-xl xl:text-2xl">
-							More on
+							More
 						</h2>
 					</div>
 

@@ -38,30 +38,51 @@ export default function Footer() {
 								width={24}
 								height={24}
 							/>
-							<p className="text-sm sm:text-base">081234568900</p>
+							<p className="text-sm sm:text-base">09166038243</p>
 						</div>
 						<div className="inline-flex items-center gap-3">
 							<Image src="/assets/icons/mail.svg" alt="mail icon" width={24} height={24} />
 							<p className="text-sm sm:text-base">rovingnaija@gmail.com</p>
 						</div>
 					</div>
-
 					<div className="flex w-full justify-between lg:w-[60%]">
 						<div className="flex flex-col gap-5">
-							<p className="mb-4 text-balance text-sm sm:text-base">Play Educative Games</p>
-							<p className="mb-4 text-balance text-sm sm:text-base">Advert rates</p>
-							<p className="mb-4 text-balance text-sm sm:text-base">Subscription</p>
-							<p className="text-sm sm:text-base">Instructions</p>
+							<Link href="/games" className="mb-4 text-balance text-sm sm:text-base">
+								Play Educative Games
+							</Link>
+							<Link href="#" className="mb-4 text-balance text-sm sm:text-base">
+								Advert rates
+							</Link>
+							<Link href="/pricing" className="mb-4 text-balance text-sm sm:text-base">
+								Subscription
+							</Link>
+							<Link href="/instructions" className="text-sm sm:text-base">
+								Instructions
+							</Link>
 						</div>
+
 						<div className="flex flex-col gap-5">
-							<p className="mb-4 text-balance text-sm sm:text-base">Collaborate with Us</p>
-							<p className="mb-4 text-balance text-sm sm:text-base">Write to Us</p>
-							<p className="mb-4 text-balance text-sm sm:text-base">About Us</p>
+							<Link href="#" className="mb-4 text-balance text-sm sm:text-base">
+								Collaborate with Us
+							</Link>
+							<Link href="/contact-us" className="mb-4 text-balance text-sm sm:text-base">
+								Write to Us
+							</Link>
+							<Link href="#" className="mb-4 text-balance text-sm sm:text-base">
+								About Us
+							</Link>
 						</div>
+
 						<div className="flex flex-col gap-5">
-							<p className="mb-4 text-balance text-sm sm:text-base">Terms & Conditions</p>
-							<p className="mb-4 text-balance text-sm sm:text-base">Privacy Policy</p>
-							<p>FAQ</p>
+							<Link href="#" className="mb-4 text-balance text-sm sm:text-base">
+								Terms & Conditions
+							</Link>
+							<Link href="/privacy" className="mb-4 text-balance text-sm sm:text-base">
+								Privacy Policy
+							</Link>
+							<Link href="/faqs" className="text-sm sm:text-base">
+								FAQ
+							</Link>
 						</div>
 					</div>
 				</div>

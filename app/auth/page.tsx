@@ -8,11 +8,9 @@ import Register from "@/components/auth/Register"
 import Login from "@/components/auth/Login"
 import Link from "next/link"
 import { useAuthContext } from "@/context/AuthContext"
-// import RedirectingModal from "@/components/shared/RedirectingModal"
 
 export default function Page() {
 	const { formType, setFormType } = useAuthContext()
-	// const [redirecting, setRedirecting] = React.useState(false)
 
 	function toggleFormType(e: React.MouseEvent<HTMLButtonElement>) {
 		if (e.target && e.target instanceof HTMLElement) {
@@ -22,7 +20,6 @@ export default function Page() {
 	}
 	return (
 		<>
-			{/* <RedirectingModal open={redirecting} /> */}
 			<div
 				className={`${styles.auth_bg} flex h-screen w-screen items-center justify-end lg:px-2`}>
 				<div

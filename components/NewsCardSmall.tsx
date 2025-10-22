@@ -3,6 +3,7 @@ import Image from "next/image"
 import { Post } from "@/types/types"
 import { timeAgo } from "@/helpers/TimeFormater"
 import { Title } from "./shared/Title"
+import { format } from "date-fns"
 
 export default function NewsCardSmall({ post }: { post: Post }) {
 	return (
@@ -26,7 +27,7 @@ export default function NewsCardSmall({ post }: { post: Post }) {
 						/> */}
 					</span>
 					<span className="text-[12px]">
-						<i>{timeAgo(post.created_at)}</i>
+						<i> {post.date ? format(post?.date, "do MMMM yyyy") : timeAgo(post.created_at)}</i>
 					</span>
 				</div>
 			</div>

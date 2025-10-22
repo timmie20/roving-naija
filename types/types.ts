@@ -62,6 +62,7 @@ export interface Post {
 	created_at: string
 	updated_at: string
 	priority: number
+	date: string
 }
 
 export interface Posts {

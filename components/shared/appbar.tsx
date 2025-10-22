@@ -12,7 +12,7 @@ import { getCurrentDate } from "@/helpers/getDate"
 
 const navigation = [
 	{ name: "Home", path: "/" },
-	{ name: "Featured", path: "/topics/featured" },
+	{ name: "News", path: "/topics/news" },
 	{ name: "Politics", path: "/topics/politics" },
 	{ name: "Sports", path: "/topics/sports" },
 	{ name: "Play game", path: "/play-game", icon: <TbDeviceGamepad3 size={20} /> },
@@ -20,7 +20,7 @@ const navigation = [
 	{ name: "Entertaiment", path: "/topics/entertainment" },
 	{ name: "More", path: "/more" },
 	{ name: "Contact us", path: "/contact-us" },
-	{ name: "Adverise with us", path: "/advert" },
+	{ name: "Advertise with us", path: "/advert" },
 ]
 
 const dropdownNav = [

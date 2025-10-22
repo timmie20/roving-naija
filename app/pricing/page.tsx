@@ -30,7 +30,7 @@ export default function page() {
 			price: "N500/Month",
 			features: [
 				"One day free trial",
-				"24 Hours access",
+				"30 Days access",
 				"Full access to all features",
 				"70 Bonus coin",
 				"Eligibility to win cash prizes",
@@ -41,7 +41,7 @@ export default function page() {
 			price: "N4500/Year",
 			features: [
 				"One day free trial",
-				"24 Hours access",
+				"1 Year (365 days) access",
 				"Full access to all features",
 				"70 Bonus coin",
 				"Eligibility to win cash prizes",

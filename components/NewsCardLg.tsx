@@ -3,6 +3,7 @@ import Image from "next/image"
 import { Post } from "@/types/types"
 import { timeAgo } from "@/helpers/TimeFormater"
 import { Title } from "./shared/Title"
+import { format } from "date-fns"
 
 export default function NewsCardLg({ post }: { post: Post }) {
 	return (
@@ -25,12 +26,15 @@ export default function NewsCardLg({ post }: { post: Post }) {
 				<div className="flex items-center justify-between">
 					<aside className="flex items-center gap-3">
 						<i>
-							<small className="text-[8px] sm:text-xs">Roving 9ja</small>
+							<small className="text-[8px] sm:text-xs">Roving Naija</small>
 						</i>
 						<span className="flex items-center gap-1">
 							{/* <img src="/assets/icons/clock.svg" alt="Clock icon" /> */}
 							<i>
-								<small className="text-[8px] sm:text-xs">{timeAgo(post?.created_at)}</small>
+								<small className="text-[8px] sm:text-xs">
+									{" "}
+									{post.date ? format(post?.date, "do MMMM yyyy") : timeAgo(post.created_at)}
+								</small>
 							</i>
 						</span>
 					</aside>

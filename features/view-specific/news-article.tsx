@@ -20,8 +20,7 @@ export const NewsArticle = ({ post }: { post: Post | undefined }) => {
 				<article className="lg:w-2/3 lg:pr-8">
 					<h2 className="mb-2 text-3xl font-bold">{post?.title}</h2>
 					<p className="mb-4 text-gray-600">
-						Roving 9ja ,{" "}
-						{post?.created_at ? format(post.created_at, "do MMMM yyyy") : "Unknown date"}
+						Roving Naija , {post?.date ? format(post.date, "do MMMM yyyy") : "Unknown date"}
 					</p>
 
 					{paragraphs?.map((paragraph, index) => (
@@ -82,7 +81,7 @@ export const NewsArticle = ({ post }: { post: Post | undefined }) => {
 						/>
 					</section> */}
 				</article>
-				<aside className="mt-6 lg:mt-0 lg:w-1/3">
+				{/* <aside className="mt-6 lg:mt-0 lg:w-1/3">
 					<section className="mb-6">
 						<h3 className="mb-2 text-xl font-bold">Related Category</h3>
 						<ul>
@@ -115,7 +114,7 @@ export const NewsArticle = ({ post }: { post: Post | undefined }) => {
 							Advertise here
 						</div>
 					</section>
-				</aside>
+				</aside> */}
 			</main>
 		</MainLayout>
 	)

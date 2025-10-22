@@ -16,6 +16,7 @@ import { Button } from "../ui/button"
 import { vasRegister, backendRegister } from "@/queries/auth"
 import { toast } from "sonner"
 import { useAuthContext } from "@/context/AuthContext"
+import { useRouter } from "next/navigation"
 // import { HttpError } from "@/types/types"
 
 export default function Register<T>({
@@ -28,15 +29,7 @@ export default function Register<T>({
 	const { loginUser } = useAuthContext()
 	const [loading, setLoading] = useState(false)
 
-	// useEffect(() => {
-	// 	const handleRouteChange = () => setRedirecting(false)
-	// 	// @ts-expect-error: Next.js router.events is not typed in app router
-	// 	if (router.events?.on) router.events.on("routeChangeComplete", handleRouteChange)
-	// 	return () => {
-	// 		// @ts-expect-error: Next.js router.events is not typed in app router
-	// 		if (router.events?.off) router.events.off("routeChangeComplete", handleRouteChange)
-	// 	}
-	// }, [router, setRedirecting])
+	const router = useRouter()
 
 	const formSchema = z.object({
 		fullname: z.string().min(5, {
@@ -104,6 +97,7 @@ export default function Register<T>({
 			if (vasResult?.success && vasResult.data?.status === 200) {
 				toast.success(vasResult.data?.message)
 				loginUser(user)
+				router.push("/")
 			} else {
 				toast.error(vasResult?.data?.message || "VAS registration failed")
 			}
